@@ -1,0 +1,45 @@
+@import "tailwindcss";
+/* @plugin "tailwindcss-animate"; */
+
+@theme {
+  --font-mona-sans: "Mona Sans", sans-serif;
+
+}
+
+
+
+/* :root {}
+
+.dark {}
+
+/* @layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  p {
+    @apply text-light-100;
+  }
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+  ul {
+    @apply list-disc list-inside;
+  }
+  li {
+    @apply text-light-100;
+  }
+}
+ */
+
+/* @layer components {} */
+
+
+/* @utility dark-gradient {
+  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
+} */
