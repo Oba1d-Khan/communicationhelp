@@ -2,6 +2,20 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ChevronDown } from "lucide-react";
+
 import { Menu, Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,20 +25,21 @@ const navLinks = [
     href: "/",
   },
   {
+    title: "Topics",
+    href: "/topics",
+  },
+  {
+    title: "Contents",
+    href: "/contents",
+  },
+
+  {
     title: "Blog",
     href: "/blog",
   },
   {
     title: "About",
     href: "/about",
-  },
-  {
-    title: "Contents",
-    href: "/contents",
-  },
-  {
-    title: "Topics",
-    href: "/topics",
   },
 ];
 const Navbar = () => {
@@ -72,15 +87,54 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex gap-6 items-center">
-          {navLinks.map((link) => (
-            <Link
-              key={link.title}
-              href={link.href}
-              className="text-sm font-medium tracking-widest uppercase text-white hover:text-gray-300 transition-colors"
-            >
-              {link.title}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.title === "Topics" ? (
+              <DropdownMenu
+                key={link.title}
+                className="focus:outline-none focus:ring-0"
+              >
+                <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium tracking-widest uppercase text-white hover:text-gray-300 transition-colors ">
+                  {link.title}
+                  <ChevronDown size={14} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="animate-slideDown bg-neutral-900 mt-2 ">
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/topics/communication"
+                      className="text-white hover:bg-neutral-700 text-sm font-medium tracking-widest uppercase"
+                    >
+                      Persuation
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/topics/psychology"
+                      className="text-white hover:bg-neutral-700 text-sm font-medium tracking-widest uppercase"
+                    >
+                      Listening
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/topics/social-skills"
+                      className="text-white hover:bg-neutral-700 text-sm font-medium tracking-widest uppercase"
+                    >
+                      Empathy
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                key={link.title}
+                href={link.href}
+                className="text-sm font-medium tracking-widest uppercase text-white hover:text-gray-300 transition-colors"
+              >
+                {link.title}
+              </Link>
+            )
+          )}
+
           <span className="hidden md:block w-px h-6 bg-gray-400 "></span>
 
           <Button
@@ -139,16 +193,56 @@ const Navbar = () => {
 
             {/* Nav links */}
             <div className="px-12 text-center space-y-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  className="block text-base font-medium tracking-widest uppercase text-white hover:text-blue-400 transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.title}
-                </Link>
-              ))}
+              {navLinks.map((link) =>
+                link.title === "Topics" ? (
+                  <Accordion
+                    type="single"
+                    collapsible
+                    key={link.title}
+                    className="text-white w-full "
+                  >
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="text-base font-medium tracking-widest uppercase text-white hover:text-blue-400 transition-colors px-2 py-2 rounded-md ">
+                        Topics
+                      </AccordionTrigger>
+
+                      {/* Group all links in one content block for tighter spacing & uniform bg */}
+                      <AccordionContent className="animate-slideDown bg-neutral-800 rounded-lg text-base space-y-1 py-2 ">
+                        <Link
+                          href="#"
+                          className="block px-4 py-2 text-white hover:bg-neutral-600 text-base font-medium tracking-widest uppercase rounded transition"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Persuasion
+                        </Link>
+                        <Link
+                          href="#"
+                          className="block px-4 py-2 text-white hover:bg-neutral-600 text-base font-medium tracking-widest uppercase rounded transition"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Listening
+                        </Link>
+                        <Link
+                          href="#"
+                          className="block px-4 py-2 text-white hover:bg-neutral-600 text-base font-medium tracking-widest uppercase rounded transition"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Empathy
+                        </Link>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                ) : (
+                  <Link
+                    key={link.title}
+                    href={link.href}
+                    className="block text-base font-medium tracking-widest uppercase text-white hover:text-blue-400 transition-colors px-2 py-2 rounded-md"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.title}
+                  </Link>
+                )
+              )}
 
               <Button
                 variant="outline"

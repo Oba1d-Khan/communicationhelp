@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* @plugin "tailwindcss-animate"; */
+@plugin "tailwindcss-animate";
 
 
 @theme {
@@ -115,4 +115,51 @@
 }
 
 
-/* @layer components {} */
+/* animations */
+@utility animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-slideDown {
+  animation: slideDown 0.35s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-slideDownSoft {
+  animation: slideDownSoft 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slideDownSoft {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
