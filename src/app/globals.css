@@ -1,45 +1,118 @@
 @import "tailwindcss";
 /* @plugin "tailwindcss-animate"; */
 
+
 @theme {
+  /* Fonts */
   --font-mona-sans: "Mona Sans", sans-serif;
+
+  /* Colors */
+  --color-background: #f8f8f8;
+  --color-foreground: #0f0f0f;
+
+  --color-primary: #4f46e5;
+  --color-primary-100: #dddfff;
+  --color-primary-200: #cac5fe;
+  --color-secondary: #a78bfa;
+
+  --color-success-100: #49de50;
+  --color-success-200: #42c748;
+  --color-destructive-100: #f75353;
+  --color-destructive-200: #c44141;
+
+  --color-light-100: #d6e0ff;
+  --color-light-400: #6870a6;
+  --color-light-600: #4f557d;
+  --color-light-800: #24273a;
+
+  --color-dark-100: #020408;
+  --color-dark-200: #27282f;
+  --color-dark-300: #242633;
+
+  /* Responsive breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  /* Background */
+  /* --bg-pattern: url("/pattern.png"); */
+
+}
+
+
+@layer components {
+  .container {
+    @apply w-[80vw] max-w-screen-xl mx-auto;
+  }
+}
+
+@layer components {
+  .root-layout {
+    @apply max-w-7xl mx-auto flex flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
+  }
+}
+
+@utility jcc {
+  @apply justify-center;
+}
+
+@utility jcb {
+  @apply justify-between;
+}
+
+@utility jce {
+  @apply justify-end;
+}
+
+@utility aic {
+  @apply items-center;
+}
+
+@utility aie {
+  @apply items-end;
+}
+
+
+/* :root {} */
+
+.dark {
+  --color-background: #0f0f0f;
+  --color-foreground: #f8f8f8;
 
 }
 
 
 
-/* :root {}
-
-.dark {}
-
-/* @layer base {
-  * {
+@layer base {
+  /* * {
     @apply border-border outline-ring/50;
-  }
+  } */
+
   body {
     @apply bg-background text-foreground;
   }
+
   p {
     @apply text-light-100;
   }
+
   h2 {
     @apply text-3xl font-semibold;
   }
+
   h3 {
     @apply text-2xl font-semibold;
   }
+
   ul {
     @apply list-disc list-inside;
   }
+
   li {
     @apply text-light-100;
   }
 }
- */
+
 
 /* @layer components {} */
-
-
-/* @utility dark-gradient {
-  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
-} */
