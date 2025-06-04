@@ -1,10 +1,17 @@
-import { Mona_Sans } from "next/font/google";
+import { Mona_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const monaSans = Mona_Sans({
   variable: "--font-mona-sans",
   subsets: ["latin"],
+});
+
+const dmSerif = DM_Serif_Display({
+  variable: "--font-dm-serif-display",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata = {
@@ -18,9 +25,12 @@ export default function RootLayout({ children }) {
       lang="en"
       // className="dark"     applies dark mode permanently
     >
-      <body className={`${monaSans.variable} font-mona-sans   antialiased`}>
+      <body
+        className={`${monaSans.variable} ${dmSerif.variable} font-dm-sans   antialiased`}
+      >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
