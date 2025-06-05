@@ -1,7 +1,9 @@
+import Hero from "@/components/home/Hero";
+
 export default function Home() {
   return (
-    <div className="text-3xl text-white  root-layout h-screen bg-slate-700">
-      <h1 className="">This is the homepage </h1>
+    <div className="text-3xl text-red-800 root-layout h-screen ">
+      <Hero />
     </div>
   );
 }
