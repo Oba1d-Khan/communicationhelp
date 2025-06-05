@@ -3,11 +3,9 @@ import CTA from "@/components/shared/CTA";
 
 export default function Home() {
   return (
-    <div className="root-layout  ">
-      <main>
-        <Hero />
-      </main>
+    <main className="root-layout min-h-screen">
+      <Hero />
       <CTA />
-    </div>
+    </main>
   );
 }

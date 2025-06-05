@@ -1,7 +1,12 @@
+import Intro from "@/components/about/Intro";
 import React from "react";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <main className="root-layout min-h-screen">
+      <Intro />
+    </main>
+  );
 };
 
 export default page;
