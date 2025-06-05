@@ -1,9 +1,13 @@
 import Hero from "@/components/home/Hero";
+import CTA from "@/components/shared/CTA";
 
 export default function Home() {
   return (
-    <div className="text-3xl text-red-800 root-layout h-screen ">
-      <Hero />
+    <div className="root-layout  ">
+      <main>
+        <Hero />
+      </main>
+      <CTA />
     </div>
   );
 }

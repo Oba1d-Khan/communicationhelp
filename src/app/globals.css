@@ -10,17 +10,17 @@
   --font-heading: var(--font-dm-serif-display);
 
   /* Light Theme (Default) */
-  --color-background: #fafafa;
-  --color-foreground: #0f172a;
+  --color-background: #E7EFC7;
+  --color-foreground: #242419;
 
-  --color-primary: #4f46e5;
-  --color-secondary: #6366f1;
+  --color-primary: #3B3B1A;
+  --color-secondary: #8A784E;
 
   --color-success: #10b981;
   --color-destructive: #ef4444;
 
   --color-muted: #cbd5e1;
-  --color-text-light: #64748b;
+  --color-text-light: #362e1f;
 
   /* Dark Theme */
   --color-background-dark: #0f172a;

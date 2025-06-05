@@ -46,7 +46,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-transparent sticky top-0 z-50 px-4">
+    <header className="bg-transparent  backdrop-filter backdrop-blur-lg  backdrop-brightness-25 sticky top-0 z-50 px-4">
       <div className="container mx-auto px-4 py-4 pt-5 flex items-center justify-between">
         <div className="flex aic gap-5">
           {/* Logo */}
