@@ -3,7 +3,7 @@ import { navigation } from "@/constants/constants";
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t border-gray-200 dark:border-gray-700">
+    <footer className="w-full border-t border-gray-300 ">
       <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
           {navigation.main.map((item) => (
