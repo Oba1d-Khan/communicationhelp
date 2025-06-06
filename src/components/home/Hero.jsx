@@ -5,7 +5,7 @@ const Hero = () => {
     <section className="root-layout">
       {/* Hero Section */}
       <div className="text-center flex flex-col items-center gap-6">
-        <h1 className="text-5xl max-w-3xl leading-tight">
+        <h1 className="lg:text-5xl max-w-3xl leading-tight">
           Improve Your{" "}
           <span className="text-primary text-shadow-md">Relationships</span>
         </h1>

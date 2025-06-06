@@ -25,3 +25,12 @@ export const navigation = {
     },
   ],
 };
+
+// workshop benefits
+
+export const benefits = [
+  "Attract people with your ability to make them feel seen, heard, and understood",
+  "Know exactly how to respond when someone shares something personal",
+  "Build the trust that makes you a leader people actually want to follow",
+  "Eliminate awkward silences",
+];
