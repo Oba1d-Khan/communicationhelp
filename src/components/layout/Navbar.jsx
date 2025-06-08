@@ -4,32 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { ChevronDown, ChevronRight } from "lucide-react";
-
+import { navLinks } from "@/constants/constants";
 import { Menu, Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "Topics",
-    href: "/topics",
-  },
-  {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "About",
-    href: "/about",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-  },
-];
 
 const topicItems = [
   { title: "Persuasion", href: "/topics/persuasion" },
@@ -39,8 +16,6 @@ const topicItems = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isTopicsExpanded, setIsTopicsExpanded] = useState(false);
-  const router = useRouter();
 
   return (
     <header className="bg-transparent backdrop-filter backdrop-blur-lg backdrop-brightness-25 sticky top-0 z-50 px-4">
@@ -75,54 +50,15 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex gap-6 items-center">
-          {navLinks.map((link) =>
-            link.title === "Topics" ? (
-              <div
-                key={link.title}
-                className="relative group"
-                onMouseEnter={() => setIsOpen(true)}
-                onMouseLeave={() => setIsOpen(false)}
-              >
-                <Link
-                  href="/topics"
-                  className="cursor-pointer flex items-center gap-1 text-sm font-medium tracking-widest uppercase text-white hover:text-gray-300 transition-colors"
-                >
-                  Topics
-                  <ChevronDown size={14} />
-                </Link>
-
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute left-0 mt-2 bg-neutral-900 rounded-md shadow-lg z-50 w-52 py-2"
-                    >
-                      {topicItems.map((topic) => (
-                        <Link
-                          key={topic.title}
-                          href={topic.href}
-                          className="block px-4 py-2 text-white hover:bg-neutral-700 text-sm font-medium tracking-widest uppercase transition-colors"
-                        >
-                          {topic.title}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ) : (
-              <Link
-                key={link.title}
-                href={link.href}
-                className="cursor-pointer text-sm font-medium tracking-widest uppercase text-white hover:text-gray-300 transition-colors"
-              >
-                {link.title}
-              </Link>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.title}
+              href={link.href}
+              className="cursor-pointer text-sm font-medium tracking-widest uppercase text-white hover:text-gray-300 transition-colors"
+            >
+              {link.title}
+            </Link>
+          ))}
 
           <span className="hidden md:block w-px h-6 bg-gray-400"></span>
 
@@ -181,70 +117,16 @@ const Navbar = () => {
 
             {/* Nav links - mobile */}
             <div className="px-4 text-center space-y-5">
-              {navLinks.map((link) =>
-                link.title === "Topics" ? (
-                  <div key={link.title} className="px-6 space-y-2">
-                    {/* Main Topics Link */}
-                    <div className="flex items-center justify-between bg-neutral-800 rounded-lg px-4 py-2">
-                      <Link
-                        href="/topics"
-                        className="flex-1 text-left text-base font-medium tracking-widest uppercase text-white hover:text-blue-400 transition-colors"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Topics
-                      </Link>
-                      <button
-                        onClick={() => setIsTopicsExpanded(!isTopicsExpanded)}
-                        className="p-1 text-white hover:text-blue-400 transition-colors"
-                        aria-label="Toggle topics dropdown"
-                      >
-                        <ChevronRight
-                          size={16}
-                          className={`transform transition-transform ${
-                            isTopicsExpanded ? "rotate-270" : "rotate-90"
-                          }`}
-                        />
-                      </button>
-                    </div>
-
-                    {/* Topics Dropdown */}
-                    <AnimatePresence>
-                      {isTopicsExpanded && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="bg-neutral-700 rounded-lg overflow-hidden"
-                        >
-                          {topicItems.map((topic) => (
-                            <Link
-                              key={topic.title}
-                              href={topic.href}
-                              className="block px-6 py-3 text-white hover:bg-neutral-600 text-sm font-medium tracking-widest uppercase transition-colors border-b border-neutral-600 last:border-b-0"
-                              onClick={() => {
-                                setIsOpen(false);
-                                setIsTopicsExpanded(false);
-                              }}
-                            >
-                              {topic.title}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <Link
-                    key={link.title}
-                    href={link.href}
-                    className="block text-base font-medium tracking-widest uppercase text-white hover:text-blue-400 transition-colors px-2 py-2 rounded-md"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.title}
-                  </Link>
-                )
-              )}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className="block text-base font-medium tracking-widest uppercase text-white hover:text-blue-400 transition-colors px-2 py-2 rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.title}
+                </Link>
+              ))}
 
               <Button
                 variant="outline"

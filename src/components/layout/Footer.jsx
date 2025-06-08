@@ -1,12 +1,12 @@
 import React from "react";
-import { navigation } from "@/constants/constants";
+import { navLinks, socials } from "@/constants/constants";
 
 const Footer = () => {
   return (
     <footer className="w-full border-t border-gray-300 ">
       <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-          {navigation.main.map((item) => (
+          {navLinks.map((item) => (
             <a
               key={item.name}
               href={item.href}
@@ -17,7 +17,7 @@ const Footer = () => {
           ))}
         </nav>
         <div className="mt-6 flex justify-center space-x-6">
-          {navigation.social.map((item) => (
+          {socials.map((item) => (
             <a
               key={item.name}
               href={item.href}
