@@ -1,7 +1,15 @@
-import React from "react";
+import ReadingList from "@/components/recommended-readings/ReadingList";
 
-const page = () => {
-  return <div>page</div>;
+export const metadata = {
+  title: "Recommended Reading | Bruce Lambert",
+  description:
+    "Book recommendations to improve your communication skills from Bruce Lambert, Ph.D.",
 };
 
-export default page;
+export default function RecommendedReadingPage() {
+  return (
+    <main className="root-layout min-h-screen">
+      <ReadingList />
+    </main>
+  );
+}
