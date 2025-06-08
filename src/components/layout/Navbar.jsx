@@ -18,16 +18,16 @@ const navLinks = [
     href: "/topics",
   },
   {
-    title: "Contents",
-    href: "/contents",
-  },
-  {
     title: "Blog",
     href: "/blog",
   },
   {
     title: "About",
     href: "/about",
+  },
+  {
+    title: "Contact",
+    href: "/contact",
   },
 ];
 
