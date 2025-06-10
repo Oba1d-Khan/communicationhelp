@@ -1,8 +1,8 @@
 import {defineType, defineField} from 'sanity'
 
-export const topicType = defineType({
-  name: 'topic',
-  title: 'Topic',
+export const bookCategoryType = defineType({
+  name: 'bookCategory',
+  title: 'Book Category',
   type: 'document',
   fields: [
     defineField({
@@ -13,17 +13,13 @@ export const topicType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      options: {source: 'title', maxLength: 96},
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
       type: 'text',
-      rows: 3,
-      description: 'Short description of this topic (used in cards and SEO)',
+      description: 'Optional: Short explanation of what this category covers.',
     }),
   ],
 })

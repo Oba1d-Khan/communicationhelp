@@ -66,7 +66,7 @@ const Navbar = () => {
             variant="outline"
             className="cursor-pointer rounded-full border-white text-black hover:bg-white hover:text-black transition"
           >
-            Recommended Readings
+            <Link href="/recommended-readings">Recommended Readings</Link>
           </Button>
         </nav>
 

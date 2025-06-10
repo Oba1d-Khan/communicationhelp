@@ -20,15 +20,21 @@ export const bookType = defineType({
       type: 'image',
     }),
     defineField({
+      name: 'description',
+      type: 'text',
+      title: 'Why this book?',
+      rows: 3,
+    }),
+    defineField({
       name: 'purchaseLink',
       type: 'url',
       title: 'Buy Link',
     }),
     defineField({
-      name: 'topic',
+      name: 'bookCategory',
       type: 'reference',
-      title: 'Related Topic',
-      to: [{type: 'topic'}],
+      title: 'Book Category',
+      to: [{type: 'bookCategory'}],
     }),
   ],
 })

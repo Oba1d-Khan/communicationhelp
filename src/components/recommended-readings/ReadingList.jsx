@@ -4,8 +4,16 @@ import { useState } from "react";
 import { Bookmark, BookOpen, ChevronRight, Search, Tag } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { urlForImage } from "@/sanity/utils/urlFor";
 
-const ReadingList = () => {
+//                   src={urlForImage(book.coverImage).url()}
+
+const ReadingList = ({ books }) => {
+  console.log(
+    "books",
+    books.map((item) => item.books._id)
+  );
+
   const [activeCategory, setActiveCategory] = useState("verbal");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -14,93 +22,6 @@ const ReadingList = () => {
     { id: "nonverbal", name: "Nonverbal Communication" },
     { id: "leadership", name: "Leadership" },
     { id: "persuasion", name: "Persuasion" },
-  ];
-
-  const books = [
-    {
-      id: 1,
-      title: "Crucial Conversations",
-      author: "Kerry Patterson, Joseph Grenny",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "verbal",
-      featured: true,
-      tags: ["conflict resolution", "difficult conversations"],
-      description:
-        "Tools for talking when stakes are high. Learn how to navigate difficult conversations effectively.",
-    },
-    {
-      id: 2,
-      title: "Difficult Conversations",
-      author: "Douglas Stone, Bruce Patton, Sheila Heen",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "verbal",
-      featured: true,
-      tags: ["conflict resolution", "communication"],
-      description:
-        "How to discuss what matters most. A guide to handling the toughest conversations in your life.",
-    },
-    {
-      id: 3,
-      title: "Influence: The Psychology of Persuasion",
-      author: "Robert B. Cialdini, Ph.D.",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "persuasion",
-      featured: true,
-      tags: ["psychology", "persuasion"],
-      description:
-        "The classic book on the psychology of persuasion, explaining the six universal principles of influence.",
-    },
-    {
-      id: 4,
-      title: "Never Split the Difference",
-      author: "Chris Voss",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "persuasion",
-      featured: true,
-      tags: ["negotiation", "persuasion"],
-      description:
-        "Negotiating as if your life depended on it. Former FBI hostage negotiator shares his field-tested tactics.",
-    },
-    {
-      id: 5,
-      title: "How to Win Friends & Influence People",
-      author: "Dale Carnegie",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "verbal",
-      tags: ["relationships", "influence"],
-      description:
-        "The classic guide to building relationships and influencing others through genuine connection.",
-    },
-    {
-      id: 6,
-      title: "The Art of Condolence",
-      author: "Leonard M. Zunin, M.D. and Hilary Stanton Zunin",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "verbal",
-      tags: ["empathy", "difficult conversations"],
-      description:
-        "What to write, what to say, what to do at a time of loss. A compassionate guide to supporting others.",
-    },
-    {
-      id: 7,
-      title: "Persuasion: Theory and Research",
-      author: "Daniel J. O'Keefe",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "persuasion",
-      tags: ["research", "academic"],
-      description:
-        "A comprehensive academic exploration of persuasion theories and research findings.",
-    },
-    {
-      id: 8,
-      title: "Humble Inquiry",
-      author: "Edgar H. Schein",
-      cover: "/placeholder.svg?height=300&width=200",
-      category: "leadership",
-      tags: ["listening", "leadership"],
-      description:
-        "The gentle art of asking instead of telling. How to build relationships through genuine curiosity.",
-    },
   ];
 
   const filteredBooks = books.filter(
@@ -156,15 +77,17 @@ const ReadingList = () => {
             >
               All Categories
             </Button>
-            {categories.map((category) => (
+            {books.map((category) => (
               <Button
-                key={category.id}
-                variant={activeCategory === category.id ? "default" : "outline"}
+                key={category._id}
+                variant={
+                  activeCategory === category._id ? "default" : "outline"
+                }
                 size="default"
                 className="rounded-full cursor-pointer transition-all duration-200 hover:scale-105"
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => setActiveCategory(category._id)}
               >
-                {category.name}
+                {category.title}
               </Button>
             ))}
           </div>
@@ -255,28 +178,30 @@ const ReadingList = () => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {regularBooks.map((book) => (
-              <div
-                key={book.id}
-                className="group bg-white dark:bg-primary/5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-primary/10 cursor-pointer hover:-translate-y-1"
-              >
-                <div className="aspect-[2/3] relative overflow-hidden">
-                  <Image
-                    src={"/images/book.jpg"}
-                    alt={book.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
+            {books.map((items) =>
+              items.books.map((book) => (
+                <div
+                  key={book._id}
+                  className="group bg-white dark:bg-primary/5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-primary/10 cursor-pointer hover:-translate-y-1"
+                >
+                  <div className="aspect-[2/3] relative overflow-hidden">
+                    <Image
+                      src={urlForImage(book.coverImage).url()}
+                      alt={book.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
 
-                <div className="p-3">
-                  <h4 className="font-heading text-foreground text-base mb-1 line-clamp-1">
-                    {book.title}
-                  </h4>
-                  <p className="text-text-light text-xs">{book.author}</p>
+                  <div className="p-3">
+                    <h4 className="font-heading text-foreground text-base mb-1 line-clamp-1">
+                      {book.title}
+                    </h4>
+                    <p className="text-text-light text-xs">{book.author}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
 
