@@ -9,9 +9,10 @@ import { urlForImage } from "@/sanity/utils/urlFor";
 //                   src={urlForImage(book.coverImage).url()}
 
 const ReadingList = ({ books }) => {
+  console.log("books.books", books.length, books);
   console.log(
-    "books",
-    books.map((item) => item.books._id)
+    "books.item",
+    books.map((item) => item.books.length)
   );
 
   const [activeCategory, setActiveCategory] = useState("verbal");
@@ -206,7 +207,23 @@ const ReadingList = ({ books }) => {
         </div>
 
         {/* Empty state */}
-        {filteredBooks.length === 0 && (
+        {books.map(
+          (bookCategory) =>
+            bookCategory.books.length === 0 && (
+              <div className="text-center py-12" key={bookCategory._id}>
+                <BookOpen className="mx-auto h-12 w-12 text-foreground/70 mb-4" />
+                <h3 className="text-lg font-heading text-foreground/70 mb-2">
+                  No books found
+                </h3>
+                <p className="text-text-light">
+                  Try adjusting your search or filter criteria to find more
+                  books.
+                </p>
+              </div>
+            )
+        )}
+
+        {/* {books.length === 0 && (
           <div className="text-center py-12">
             <BookOpen className="mx-auto h-12 w-12 text-foreground/70 mb-4" />
             <h3 className="text-lg font-heading text-foreground/70 mb-2">
@@ -216,7 +233,7 @@ const ReadingList = ({ books }) => {
               Try adjusting your search or filter criteria to find more books.
             </p>
           </div>
-        )}
+        )} */}
 
         {/* Note about ad blockers */}
         {filteredBooks.length > 0 && (

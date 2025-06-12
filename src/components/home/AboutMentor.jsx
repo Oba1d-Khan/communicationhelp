@@ -97,7 +97,8 @@ const AboutMentor = () => {
                   <div className="text-center mb-6">
                     <div className="relative w-24 h-24 md:w-28 md:h-28 mx-auto mb-4">
                       <Image
-                        src="/images/dp.jpg"
+                        // src="/images/dp.jpg"
+                        src="/images/dpdpdpdp.jpg"
                         alt="Bruce Lambert"
                         fill
                         className="object-cover rounded-full border-4 border-primary/20"
