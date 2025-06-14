@@ -58,7 +58,7 @@ const ReadingList = ({ books }) => {
           </p>
         </div>
         {/* Search and filter */}
-        <div className="flex flex-col md:flex-row gap-4 mb-10 items-center lg:items-end  justify-between">
+        <div className="flex flex-col  gap-4 mb-10 items-center   justify-between">
           <div className="relative w-[90%] mb-3 md:mb-0 md:px-0  md:w-auto md:min-w-[320px]">
             <Search
               strokeWidth={3}
@@ -73,10 +73,10 @@ const ReadingList = ({ books }) => {
             />
           </div>
 
-          <div className="flex flex-wrap gap-2 justify-center md:justify-end">
+          <div className="flex flex-wrap gap-2 justify-center ">
             <Button
               variant={activeCategory === "all" ? "default" : "outline"}
-              size="sm"
+              size="default"
               className="rounded-full cursor-pointer transition-all duration-200 hover:scale-105"
               onClick={() => {
                 setActiveCategory("all");
