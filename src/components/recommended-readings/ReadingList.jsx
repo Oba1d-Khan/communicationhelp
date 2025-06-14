@@ -9,21 +9,27 @@ import { urlForImage } from "@/sanity/utils/urlFor";
 //                   src={urlForImage(book.coverImage).url()}
 
 const ReadingList = ({ books }) => {
-  console.log("books.books", books.length, books);
-  console.log(
-    "books.item",
-    books.map((item) => item.books.length)
-  );
-
-  const [activeCategory, setActiveCategory] = useState("verbal");
+  // @states
+  const [toggleCategory, setToggleCategory] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = [
-    { id: "verbal", name: "Verbal Communication" },
-    { id: "nonverbal", name: "Nonverbal Communication" },
-    { id: "leadership", name: "Leadership" },
-    { id: "persuasion", name: "Persuasion" },
-  ];
+  console.log("books", books.length, books);
+
+  console.log("activeCategory", activeCategory);
+  const categorizedBooks = books.find(
+    (book) => book.category === activeCategory
+  );
+  console.log("categorizedBooks", categorizedBooks);
+
+  const allBooks = books.map((book) => book.books.map((item) => item));
+  console.log("allBooks", allBooks);
+
+  const flatBooks = allBooks.flat();
+  console.log(
+    "allBook.map",
+    allBooks.flat().map((item) => item)
+  );
 
   const filteredBooks = books.filter(
     (book) =>
@@ -37,7 +43,6 @@ const ReadingList = ({ books }) => {
   );
 
   const featuredBooks = filteredBooks.filter((book) => book.featured);
-  const regularBooks = filteredBooks.filter((book) => !book.featured);
 
   return (
     <section className="relative w-full py-16 md:py-24 overflow-hidden">
@@ -52,7 +57,6 @@ const ReadingList = ({ books }) => {
             teaching and coaching.
           </p>
         </div>
-
         {/* Search and filter */}
         <div className="flex flex-col md:flex-row gap-4 mb-10 items-center lg:items-end  justify-between">
           <div className="relative w-[90%] mb-3 md:mb-0 md:px-0  md:w-auto md:min-w-[320px]">
@@ -74,26 +78,31 @@ const ReadingList = ({ books }) => {
               variant={activeCategory === "all" ? "default" : "outline"}
               size="sm"
               className="rounded-full cursor-pointer transition-all duration-200 hover:scale-105"
-              onClick={() => setActiveCategory("all")}
+              onClick={() => {
+                setActiveCategory("all");
+                setToggleCategory(false);
+              }}
             >
-              All Categories
+              All
             </Button>
             {books.map((category) => (
               <Button
                 key={category._id}
                 variant={
-                  activeCategory === category._id ? "default" : "outline"
+                  activeCategory === category.category ? "default" : "outline"
                 }
                 size="default"
                 className="rounded-full cursor-pointer transition-all duration-200 hover:scale-105"
-                onClick={() => setActiveCategory(category._id)}
+                onClick={() => {
+                  setActiveCategory(category.category);
+                  setToggleCategory(true);
+                }}
               >
-                {category.title}
+                {category.category}
               </Button>
             ))}
           </div>
         </div>
-
         {/* Featured books */}
         {featuredBooks.length > 0 && (
           <div className="mb-16">
@@ -166,21 +175,22 @@ const ReadingList = ({ books }) => {
           </div>
         )}
 
-        {/* Regular books */}
+        {/* List Books */}
         <div>
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-2xl font-heading text-foreground flex items-center">
               <BookOpen className="mr-2 h-6 w-6 text-primary" />
               {activeCategory === "all"
                 ? "All Books"
-                : categories.find((c) => c.id === activeCategory)?.name ||
+                : books.find((c) => c.category === activeCategory)?.category ||
                   "Books"}
             </h3>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {books.map((items) =>
-              items.books.map((book) => (
+            {/* Categorized Books */}
+            {(toggleCategory ? categorizedBooks.books : flatBooks).map(
+              (book) => (
                 <div
                   key={book._id}
                   className="group bg-white dark:bg-primary/5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-primary/10 cursor-pointer hover:-translate-y-1"
@@ -201,7 +211,7 @@ const ReadingList = ({ books }) => {
                     <p className="text-text-light text-xs">{book.author}</p>
                   </div>
                 </div>
-              ))
+              )
             )}
           </div>
         </div>
@@ -222,7 +232,6 @@ const ReadingList = ({ books }) => {
               </div>
             )
         )}
-
         {/* {books.length === 0 && (
           <div className="text-center py-12">
             <BookOpen className="mx-auto h-12 w-12 text-foreground/70 mb-4" />
@@ -234,7 +243,6 @@ const ReadingList = ({ books }) => {
             </p>
           </div>
         )} */}
-
         {/* Note about ad blockers */}
         {filteredBooks.length > 0 && (
           <div className="mt-12 text-center">

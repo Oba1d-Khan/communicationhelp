@@ -1,7 +1,7 @@
 export const BOOKS_BY_CATEGORY_QUERY = `
 *[_type == "bookCategory"] | order(title asc) {
   _id,
-  title,
+  category,
   slug,
   description,
   "books": *[

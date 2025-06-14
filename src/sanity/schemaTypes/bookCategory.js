@@ -6,14 +6,14 @@ export const bookCategoryType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
+      name: 'category',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
       type: 'slug',
-      options: {source: 'title', maxLength: 96},
+      options: {source: 'category', maxLength: 96},
       validation: (rule) => rule.required(),
     }),
     defineField({
