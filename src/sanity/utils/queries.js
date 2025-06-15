@@ -16,24 +16,14 @@ export const BOOKS_BY_CATEGORY_QUERY = `
   }
 }
 `
-// better one
-
-// export const BOOKS_BY_CATEGORY_QUERY = `
-// *[_type == "bookCategory"] | order(title asc) {
-//   _id,
-//   title,
-//   slug,
-//   description,
-//   "books": *[
-//     _type == "book" &&
-//     references(^._id)
-//   ] | order(title asc) {
-//     _id,
-//     title,
-//     author,
-//     purchaseLink,
-//     "coverImageUrl": coverImage.asset->url
-//   }
-// }
-
-// `
+export const ALL_BLOGS_QUERY = `*[_type == "blog"] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  coverImage,
+  publishedAt,
+  featured,
+  "topic": topic->title,
+  content
+}`

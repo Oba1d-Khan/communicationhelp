@@ -1,12 +1,15 @@
 "use client";
 
+import { formattedDate } from "@/sanity/utils/date";
+import { urlForImage } from "@/sanity/utils/urlFor";
 import { Calendar, Clock, Tag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const BlogCard = ({ blog, variant = "default" }) => {
-  const { title, excerpt, coverImage, author, date, readTime, topic, slug } =
-    blog;
+  const { title, excerpt, coverImage, publishedAt, topic, slug } = blog;
+
+  const date = formattedDate(publishedAt);
 
   // Featured variant (simplified with overlay content)
   if (variant === "featured") {
@@ -15,7 +18,10 @@ const BlogCard = ({ blog, variant = "default" }) => {
         <div className="group relative overflow-hidden rounded-2xl bg-white dark:bg-primary/5 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1 h-full">
           <div className="aspect-[16/9] relative overflow-hidden">
             <Image
-              src={"/images/blog-img.jpg"}
+              src={
+                urlForImage(coverImage.asset._ref).url() ||
+                "/images/blog-img.jpg"
+              }
               alt={title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -43,7 +49,7 @@ const BlogCard = ({ blog, variant = "default" }) => {
                 </span>
                 <span className="flex items-center">
                   <Clock className="w-3 h-3 mr-1" />
-                  {readTime}
+                  10 min
                 </span>
               </div>
             </div>
@@ -55,11 +61,17 @@ const BlogCard = ({ blog, variant = "default" }) => {
 
   // Default variant (clean card with better spacing)
   return (
-    <Link href={`/blog/${slug}`} className="block h-full">
+    <Link
+      // href={`/blog/${slug}`}
+      href={`/blog`}
+      className="block h-full"
+    >
       <article className="group bg-background dark:bg-primary/5 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer hover:-translate-y-1 h-full flex flex-col">
         <div className="aspect-[16/9] relative overflow-hidden">
           <Image
-            src={"/images/blog-img.jpg"}
+            src={
+              urlForImage(coverImage.asset._ref).url() || "/images/blog-img.jpg"
+            }
             alt={title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -76,7 +88,7 @@ const BlogCard = ({ blog, variant = "default" }) => {
             </span>
             <span className="flex items-center">
               <Clock className="w-3 h-3 mr-1" />
-              {readTime}
+              10 min
             </span>
           </div>
 

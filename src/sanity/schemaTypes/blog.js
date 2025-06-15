@@ -17,14 +17,10 @@ export const blogType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
+      name: 'topic',
+      type: 'reference',
+      to: [{type: 'topic'}],
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'coverImage',
-      type: 'image',
     }),
     defineField({
       name: 'excerpt',
@@ -32,15 +28,25 @@ export const blogType = defineType({
       title: 'Short Description',
     }),
     defineField({
+      name: 'coverImage',
+      type: 'image',
+    }),
+    defineField({
       name: 'youtubeUrl',
       type: 'url',
       title: 'YouTube Link (Optional)',
     }),
     defineField({
-      name: 'topic',
-      type: 'reference',
-      to: [{type: 'topic'}],
+      name: 'publishedAt',
+      type: 'datetime',
+      initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'featured',
+      type: 'boolean',
+      initialValue: false,
+      title: 'Featured',
     }),
     defineField({
       name: 'content',

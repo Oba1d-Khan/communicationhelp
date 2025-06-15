@@ -5,8 +5,11 @@ import { ChevronLeft, ChevronRight, Calendar, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { formattedDate } from "@/sanity/utils/date";
+import { urlForImage } from "@/sanity/utils/urlFor";
 
 const BlogSlider = ({ featuredBlogs }) => {
+  // @states
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState(0);
@@ -23,6 +26,7 @@ const BlogSlider = ({ featuredBlogs }) => {
     return () => clearInterval(interval);
   }, [featuredBlogs.length, isAutoPlaying]);
 
+  // @slider-functions
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % featuredBlogs.length);
     setIsAutoPlaying(false);
@@ -83,7 +87,10 @@ const BlogSlider = ({ featuredBlogs }) => {
             {/* Background Image */}
             <div className="absolute inset-0">
               <Image
-                src={"/images/blog-img.jpg"}
+                src={
+                  urlForImage(blog.coverImage.asset._ref).url() ||
+                  "/images/blog-img.jpg"
+                }
                 alt={blog.title}
                 fill
                 className="object-cover"
@@ -101,7 +108,7 @@ const BlogSlider = ({ featuredBlogs }) => {
                   <div className="flex items-center justify-center sm:justify-start lg:justify-center text-white/80 mb-2 sm:mb-4">
                     <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                     <span className="text-xs sm:text-sm font-medium">
-                      {blog.date}
+                      {formattedDate(blog.publishedAt)}
                     </span>
                   </div>
 
@@ -117,15 +124,13 @@ const BlogSlider = ({ featuredBlogs }) => {
 
                   {/* CTA */}
                   <div className="flex justify-center sm:justify-start lg:justify-center">
-                    <Link href={`/blog/${blog.slug}`}>
-                      <Button
-                        size="default"
-                        className="bg-white text-primary hover:bg-white/90 font-medium px-4 sm:px-6 md:px-8 py-2 sm:py-3 transition-all duration-300 hover:scale-105 cursor-pointer text-sm sm:text-base"
-                      >
-                        View Post
-                        <ArrowRight className="ml-1 sm:ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-                      </Button>
-                    </Link>
+                    <Button
+                      size="default"
+                      className="bg-white text-primary hover:bg-white/90 font-medium px-4 sm:px-6 md:px-8 py-2 sm:py-3 transition-all duration-300 hover:scale-105 cursor-pointer text-sm sm:text-base"
+                    >
+                      View Post
+                      <ArrowRight className="ml-1 sm:ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+                    </Button>
                   </div>
                 </div>
               </div>

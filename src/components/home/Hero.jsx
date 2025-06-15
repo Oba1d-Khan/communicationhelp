@@ -1,5 +1,6 @@
 import React from "react";
-
+import heroImg from "../../../public/images/hero-home.jpg";
+import Image from "next/image";
 const Hero = () => {
   return (
     <section className="root-layout">
@@ -12,8 +13,11 @@ const Hero = () => {
         <p className="italic text-xl text-text-light max-w-xl">
           Succeed at work. Be more confident.
         </p>
-        <img
-          src="images/hero-home.jpg"
+        <Image
+          src={heroImg}
+          width="1280"
+          height="720"
+          placeholder="blur"
           alt="People socializing"
           className="w-full max-w-4xl rounded-2xl shadow-md object-cover"
         />
