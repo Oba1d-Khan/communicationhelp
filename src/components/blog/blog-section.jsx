@@ -21,7 +21,7 @@ const BlogSection = async () => {
             Dive deeper into the art and science of human connection
           </p>
         </div>
-        <Link href="/blog">
+        <Link href="/blog" className="cursor-pointer">
           <Button variant="outline" className="hidden md:flex items-center">
             View All Posts
             <ArrowRight className="ml-2 w-4 h-4" />

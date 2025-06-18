@@ -7,14 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 const BlogCard = ({ blog, variant = "default" }) => {
+  console.log("blog", blog);
   const { title, excerpt, coverImage, publishedAt, topic, slug } = blog;
 
   const date = formattedDate(publishedAt);
+  console.log("coverImage", coverImage.asset._ref);
 
   // Featured variant (simplified with overlay content)
   if (variant === "featured") {
     return (
-      <Link href={`/blog/${slug}`} className="block h-full">
+      <Link href={`/blog/${slug?.current}`} className="block h-full">
         <div className="group relative overflow-hidden rounded-2xl bg-white dark:bg-primary/5 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1 h-full">
           <div className="aspect-[16/9] relative overflow-hidden">
             <Image
@@ -63,7 +65,7 @@ const BlogCard = ({ blog, variant = "default" }) => {
   return (
     <Link
       // href={`/blog/${slug}`}
-      href={`/blog`}
+      href={`/blog/${slug?.current}`}
       className="block h-full"
     >
       <article className="group bg-background dark:bg-primary/5 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer hover:-translate-y-1 h-full flex flex-col">
