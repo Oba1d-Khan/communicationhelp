@@ -14,9 +14,11 @@ export default function BlogMain({ blogs }) {
   const [sortBy, setSortBy] = useState("Newest First");
   const [searchQuery, setSearchQuery] = useState("");
 
+  console.log("allBlogs", blogs);
+
   const filteredBlogs = allBlogs.filter((blog) => {
     const matchesTopic =
-      selectedTopic === "All" || blog.topic === selectedTopic;
+      selectedTopic === "All" || blog.topic.title === selectedTopic;
     const matchesSearch =
       searchQuery === "" ||
       blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -84,8 +86,8 @@ export default function BlogMain({ blogs }) {
                         className="px-4 py-2 border border-primary/30 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm cursor-pointer"
                       >
                         {topics.map((topic) => (
-                          <option key={topic} value={topic}>
-                            {topic}
+                          <option key={topic.title} value={topic.title}>
+                            {topic.title}
                           </option>
                         ))}
                       </select>

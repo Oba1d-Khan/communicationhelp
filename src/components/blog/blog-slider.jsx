@@ -124,13 +124,15 @@ const BlogSlider = ({ featuredBlogs }) => {
 
                   {/* CTA */}
                   <div className="flex justify-center sm:justify-start lg:justify-center">
-                    <Button
-                      size="default"
-                      className="bg-white text-primary hover:bg-white/90 font-medium px-4 sm:px-6 md:px-8 py-2 sm:py-3 transition-all duration-300 hover:scale-105 cursor-pointer text-sm sm:text-base"
-                    >
-                      View Post
-                      <ArrowRight className="ml-1 sm:ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-                    </Button>
+                    <Link href={`/blog/${blog.slug.current}`}>
+                      <Button
+                        size="default"
+                        className="bg-white text-primary hover:bg-white/90 font-medium px-4 sm:px-6 md:px-8 py-2 sm:py-3 transition-all duration-300 hover:scale-105 cursor-pointer text-sm sm:text-base"
+                      >
+                        View Post
+                        <ArrowRight className="ml-1 sm:ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>

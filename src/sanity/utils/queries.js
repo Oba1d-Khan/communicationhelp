@@ -16,6 +16,8 @@ export const BOOKS_BY_CATEGORY_QUERY = `
   }
 }
 `
+
+// ------------------ BLOGS -----------------
 export const ALL_BLOGS_QUERY = `*[_type == "blog"] | order(publishedAt desc) {
   _id,
   title,
@@ -24,17 +26,33 @@ export const ALL_BLOGS_QUERY = `*[_type == "blog"] | order(publishedAt desc) {
   coverImage,
   publishedAt,
   featured,
-  "topic": topic->title,
+  topic->{title, _id},
   content
 }`
 
 export const BLOG_BY_SLUG_QUERY = `
   *[_type == "blog" && slug.current == $slug][0] {
     title,
+    "slug": slug.current,
     publishedAt,
     coverImage,
     excerpt,
     content,
-    "topic": topic->title
+    topic->{title, _id}
+  }
+`
+export const RELATED_BLOGS_QUERY = `
+  *[
+    _type == "blog" &&
+    topic._ref == $topic &&
+    slug.current != $slug
+  ]
+  | order(publishedAt desc)[0...2] {
+    title,
+    "slug": slug.current,
+    excerpt,
+    coverImage,
+    publishedAt,
+    topic->{title, _id}
   }
 `

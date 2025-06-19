@@ -1,17 +1,20 @@
 "use client";
 
 import { formattedDate } from "@/sanity/utils/date";
+import { getPlainTextFromPortableText } from "@/sanity/utils/getPlainTextFromPortableText";
+import { calculateReadTime } from "@/sanity/utils/readTime";
 import { urlForImage } from "@/sanity/utils/urlFor";
 import { Calendar, Clock, Tag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const BlogCard = ({ blog, variant = "default" }) => {
-  console.log("blog", blog);
-  const { title, excerpt, coverImage, publishedAt, topic, slug } = blog;
-
+  // console.log("blog for card", blog);
+  const { title, content, excerpt, coverImage, publishedAt, topic, slug } =
+    blog;
   const date = formattedDate(publishedAt);
-  // console.log("coverImage", coverImage?.asset?._ref);
+  const plainText = getPlainTextFromPortableText(content);
+  const readTime = calculateReadTime(plainText);
 
   // Featured variant (simplified with overlay content)
   if (variant === "featured") {
@@ -35,7 +38,7 @@ const BlogCard = ({ blog, variant = "default" }) => {
               <div className="flex items-center gap-2 mb-3">
                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-white/20 backdrop-blur-sm">
                   <Tag className="w-3 h-3 mr-1" />
-                  {topic}
+                  {topic?.title}
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-heading line-clamp-2 mb-2">
@@ -51,7 +54,9 @@ const BlogCard = ({ blog, variant = "default" }) => {
                 </span>
                 <span className="flex items-center">
                   <Clock className="w-3 h-3 mr-1" />
-                  10 min
+                  {readTime === 1
+                    ? `${readTime} min read`
+                    : `${readTime} mins read`}{" "}
                 </span>
               </div>
             </div>
@@ -83,14 +88,16 @@ const BlogCard = ({ blog, variant = "default" }) => {
 
         <div className="p-4 sm:p-5 flex flex-col flex-grow">
           {/* Topic tag */}
-          <div className="flex jcb aic mb-4">
+          <div className="flex jcb aic mb-5">
             <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary/10 text-primary">
               <Tag className="w-3 h-3 mr-1" />
-              {topic}
+              {topic?.title}
             </span>
-            <span className="flex items-center">
-              <Clock className="w-3 h-3 mr-1" />
-              10 min
+            <span className="flex items-center text-sm text-primary/70 font-medium">
+              <Clock className="w-4 h-4 mr-1" />
+              {readTime === 1
+                ? `${readTime} min read`
+                : `${readTime} mins read`}{" "}
             </span>
           </div>
 

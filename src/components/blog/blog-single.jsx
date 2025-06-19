@@ -9,13 +9,16 @@ import { calculateReadTime } from "@/sanity/utils/readTime";
 import PortableRenderer from "../shared/PortableRenderer";
 import { getPlainTextFromPortableText } from "@/sanity/utils/getPlainTextFromPortableText";
 
-export default function BlogSingle({ blog }) {
-  console.log("current blog", blog);
-
-  //   const relatedPosts = blog.topic === blogs.map((item) => item.topic);
+export default function BlogSingle({ blog, relatedBlogs }) {
+  // console.log("current blog", blog);
 
   const plainText = getPlainTextFromPortableText(blog.content);
   const readTime = calculateReadTime(plainText);
+
+  // related blogs
+
+  console.log("relatedBlogs", relatedBlogs);
+
   return (
     <div className="root-layout min-h-screen ">
       {/* Hero Section */}
@@ -49,7 +52,7 @@ export default function BlogSingle({ blog }) {
             {/* Meta information */}
             <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-text-light">
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary">
-                {blog.topic}
+                {blog.topic.title}
               </span>
               <span className="flex items-center">
                 <Calendar className="w-4 h-4 mr-1" />
@@ -105,11 +108,11 @@ export default function BlogSingle({ blog }) {
             <h2 className="text-3xl font-heading text-foreground mb-12 text-center">
               Related Articles
             </h2>
-            {/* <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               {relatedBlogs.map((blog, index) => (
                 <BlogCard key={index} blog={blog} />
               ))}
-            </div> */}
+            </div>
           </div>
         </div>
       </section>

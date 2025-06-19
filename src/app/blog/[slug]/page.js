@@ -1,6 +1,9 @@
 import BlogSingle from "@/components/blog/blog-single";
 import { client } from "@/sanity/client";
-import { BLOG_BY_SLUG_QUERY } from "@/sanity/utils/queries";
+import {
+  BLOG_BY_SLUG_QUERY,
+  RELATED_BLOGS_QUERY,
+} from "@/sanity/utils/queries";
 import React from "react";
 
 export const metadata = {
@@ -9,12 +12,18 @@ export const metadata = {
     "Articles on persuasion, listening, empathy, leadership, and communication by Bruce Lambert, Ph.D.",
 };
 
+const options = { next: { revalidate: 60 } };
 const BlogSinglePage = async ({ params }) => {
   const { slug } = await params;
   const blog = await client.fetch(BLOG_BY_SLUG_QUERY, { slug });
+  const relatedBlogs = await client.fetch(
+    RELATED_BLOGS_QUERY,
+    { topic: blog.topic._id, slug: slug },
+    options
+  );
   return (
     <main className="">
-      <BlogSingle blog={blog} />
+      <BlogSingle blog={blog} relatedBlogs={relatedBlogs} />
     </main>
   );
 };
