@@ -6,21 +6,20 @@ import BlogCard from "@/components/blog/blog-card";
 import { urlForImage } from "@/sanity/utils/urlFor";
 import { formattedDate } from "@/sanity/utils/date";
 import { calculateReadTime } from "@/sanity/utils/readTime";
+import PortableRenderer from "../shared/PortableRenderer";
+import { getPlainTextFromPortableText } from "@/sanity/utils/getPlainTextFromPortableText";
 
 export default function BlogSingle({ blog }) {
-  console.log(blog);
-  //   const relatedPosts = blog.topic === blogs.map((item) => item.topic);
-  //   console.log("flat", blog?.content?.children?.text?.flat());
-  //   const readTime = calculateReadTime(blog.);
-  const textContent = blog?.content
-    ?.map((block) => block.children.map((child) => child.text).join(" "))
-    .join(" ");
+  console.log("current blog", blog);
 
-  const readTime = calculateReadTime(textContent);
+  //   const relatedPosts = blog.topic === blogs.map((item) => item.topic);
+
+  const plainText = getPlainTextFromPortableText(blog.content);
+  const readTime = calculateReadTime(plainText);
   return (
-    <div className="min-h-screen bg-background">
+    <div className="root-layout min-h-screen ">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32">
+      <section className="relative pt-20  md:pt-32 md:pb-20">
         <div className="container">
           <div className="max-w-4xl mx-auto">
             {/* Back button */}
@@ -35,14 +34,15 @@ export default function BlogSingle({ blog }) {
             {/* Cover Image */}
             <div className="aspect-[16/9] relative overflow-hidden rounded-2xl mb-8">
               <Image
-                // src={blog.coverImage || "/placeholder.svg"}
                 src={
                   urlForImage(blog.coverImage?.asset?._ref).url() ||
                   "/images/blog-img.jpg"
                 }
                 alt={blog.title}
-                fill
                 className="object-cover"
+                fill
+                priority
+                placeholder="empty"
               />
             </div>
 
@@ -64,9 +64,9 @@ export default function BlogSingle({ blog }) {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl md:text-5xl font-heading text-foreground mb-8 leading-tight">
+            {/* <h1 className="text-3xl md:text-5xl font-heading text-foreground mb-8 leading-tight">
               {blog.title}
-            </h1>
+            </h1> */}
           </div>
         </div>
       </section>
@@ -77,9 +77,10 @@ export default function BlogSingle({ blog }) {
           <div className="max-w-4xl mx-auto">
             <div className="prose prose-lg max-w-none">
               <div
-                className="text-text-light leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: blog.textContent }}
+              // className="text-text-light leading-relaxed"
+              // dangerouslySetInnerHTML={{ __html: textContent }}
               />
+              <PortableRenderer content={blog.content} />
             </div>
 
             {/* Navigation */}

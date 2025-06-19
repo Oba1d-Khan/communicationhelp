@@ -63,5 +63,24 @@ export default defineType({
       type: 'image',
       options: {hotspot: true},
     }),
+    defineArrayMember({
+      name: 'videoEmbed',
+      title: 'YouTube Embed',
+      type: 'object',
+      fields: [
+        {
+          name: 'url',
+          type: 'url',
+          title: 'YouTube URL',
+          validation: (rule) =>
+            rule
+              .uri({scheme: ['http', 'https']})
+              .regex(/^https:\/\/(www\.)?youtube\.com\/watch\?v=/, {
+                name: 'YouTube URL',
+                invert: false,
+              }),
+        },
+      ],
+    }),
   ],
 })

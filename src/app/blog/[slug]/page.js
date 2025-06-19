@@ -13,7 +13,7 @@ const BlogSinglePage = async ({ params }) => {
   const { slug } = await params;
   const blog = await client.fetch(BLOG_BY_SLUG_QUERY, { slug });
   return (
-    <main>
+    <main className="">
       <BlogSingle blog={blog} />
     </main>
   );

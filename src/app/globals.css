@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme {
   /* Fonts */
   --font-mona-sans: "Mona Sans", sans-serif;

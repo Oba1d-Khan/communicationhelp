@@ -50,8 +50,7 @@ export const blogType = defineType({
     }),
     defineField({
       name: 'content',
-      type: 'array',
-      of: [{type: 'block'}],
+      type: 'blockContent',
       title: 'Main Content',
     }),
   ],

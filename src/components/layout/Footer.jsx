@@ -9,7 +9,7 @@ const Footer = () => {
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
           {navLinks.map((item) => (
             <Link
-              key={item.name}
+              key={item.title}
               href={item.href}
               className="text-sm text-primary hover:text-gray-900 "
             >
