@@ -11,7 +11,7 @@ const BlogCard = ({ blog, variant = "default" }) => {
   const { title, excerpt, coverImage, publishedAt, topic, slug } = blog;
 
   const date = formattedDate(publishedAt);
-  console.log("coverImage", coverImage.asset._ref);
+  // console.log("coverImage", coverImage?.asset?._ref);
 
   // Featured variant (simplified with overlay content)
   if (variant === "featured") {
@@ -21,7 +21,7 @@ const BlogCard = ({ blog, variant = "default" }) => {
           <div className="aspect-[16/9] relative overflow-hidden">
             <Image
               src={
-                urlForImage(coverImage.asset._ref).url() ||
+                urlForImage(coverImage?.asset?._ref).url() ||
                 "/images/blog-img.jpg"
               }
               alt={title}

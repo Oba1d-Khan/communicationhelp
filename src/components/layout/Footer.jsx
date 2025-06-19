@@ -1,5 +1,6 @@
 import React from "react";
 import { navLinks, socials } from "@/constants/constants";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -7,13 +8,13 @@ const Footer = () => {
       <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
           {navLinks.map((item) => (
-            <a
+            <Link
               key={item.name}
               href={item.href}
               className="text-sm text-primary hover:text-gray-900 "
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="mt-6 flex justify-center space-x-6">

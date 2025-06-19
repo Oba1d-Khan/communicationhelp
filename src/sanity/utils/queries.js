@@ -27,3 +27,14 @@ export const ALL_BLOGS_QUERY = `*[_type == "blog"] | order(publishedAt desc) {
   "topic": topic->title,
   content
 }`
+
+export const BLOG_BY_SLUG_QUERY = `
+  *[_type == "blog" && slug.current == $slug][0] {
+    title,
+    publishedAt,
+    coverImage,
+    excerpt,
+    content,
+    "topic": topic->title
+  }
+`
