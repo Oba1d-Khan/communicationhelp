@@ -1,6 +1,6 @@
 import BlogMain from "@/components/blog/blog-main";
 import { client } from "@/sanity/client";
-import { ALL_BLOGS_QUERY } from "@/sanity/utils/queries";
+import { ALL_BLOGS_QUERY, ALL_TOPICS_QUERY } from "@/sanity/utils/queries";
 import React from "react";
 
 const options = { next: { revalidate: 60 } };
@@ -12,10 +12,13 @@ export const metadata = {
 };
 const BlogPage = async () => {
   const blogs = await client.fetch(ALL_BLOGS_QUERY, options);
-  console.log("blogs", blogs);
+
+  // fetch topics
+  const topics = await client.fetch(ALL_TOPICS_QUERY, options);
+  // console.log("blogs", blogs);
   return (
     <main>
-      <BlogMain blogs={blogs} />
+      <BlogMain blogs={blogs} topics={topics} />
     </main>
   );
 };

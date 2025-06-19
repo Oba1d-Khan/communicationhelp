@@ -1,3 +1,4 @@
+// ------------------ BOOKS -----------------
 export const BOOKS_BY_CATEGORY_QUERY = `
 *[_type == "bookCategory"] | order(title asc) {
   _id,
@@ -16,7 +17,13 @@ export const BOOKS_BY_CATEGORY_QUERY = `
   }
 }
 `
-
+// ------------------ TOPICS -----------------
+export const ALL_TOPICS_QUERY = `
+  *[_type == "topic"] | order(title asc) {
+    _id,
+    title
+  }
+`
 // ------------------ BLOGS -----------------
 export const ALL_BLOGS_QUERY = `*[_type == "blog"] | order(publishedAt desc) {
   _id,
