@@ -27,7 +27,7 @@ const BlogListItem = ({ blog }) => {
           <div className="flex items-center gap-4 mb-4 text-sm text-text-light">
             <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
               <Tag className="w-3 h-3 mr-1" />
-              {blog.topic}
+              {blog.topic.title}
             </span>
             <span className="flex items-center">
               <Calendar className="w-4 h-4 mr-1" />

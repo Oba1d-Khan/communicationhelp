@@ -63,7 +63,9 @@ export default function BlogMain({ blogs, topics }) {
     return sorted;
   }, [blogs, selectedTopic, searchQuery, sortBy]);
 
-  const featured = blogs.filter((blog) => blog.featured);
+  const featured = useMemo(() => {
+    return blogs.filter((blog) => blog.featured);
+  }, [blogs]);
 
   return (
     <div className="min-h-screen">
