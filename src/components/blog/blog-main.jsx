@@ -234,26 +234,13 @@ export default function BlogMain({ blogs, topics }) {
                 </div>
               </div>
             </section>
-
-            {/* Mobile View All Button */}
-            <div className="text-center md:hidden">
-              <Link href="/contents">
-                <Button
-                  variant="outline"
-                  className="w-full sm:w-auto rounded-full"
-                >
-                  View All Posts
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Newsletter CTA Section */}
       <section className="py-16 md:py-24 bg-primary/5">
-        <div className="container">
+        <div className="container px-4 md:px-0">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-6">
               Never Miss an Insight
@@ -263,11 +250,11 @@ export default function BlogMain({ blogs, topics }) {
               connection delivered directly to your inbox. Join thousands of
               readers who are transforming their relationships.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <div className="flex flex-col aic jcc sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 border border-primary/30 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all duration-200"
+                className="flex-1 px-4 py-2 border border-primary/30 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all duration-200"
               />
               <Button className="px-8 py-3 rounded-full bg-primary hover:bg-primary/90 transition-all duration-200">
                 Subscribe

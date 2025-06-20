@@ -12,10 +12,6 @@ const AboutMentor = () => {
       <div className="absolute top-10 left-10 w-32 h-32 bg-secondary/20 rounded-full blur-2xl" />
       <div className="absolute bottom-20 right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
 
-      {/* Decorative lines */}
-      <div className="absolute top-[24%] left-0 w-[34%] h-1 bg-gradient-to-r from-transparent to-secondary/30 rounded-full" />
-      <div className="absolute bottom-1/2 right-0 w-32 h-px bg-gradient-to-l from-transparent to-primary/30" />
-
       <div className=" relative z-10 px-2 md:px-0">
         <div className="">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8  xl:gap-20 items-center">
@@ -72,9 +68,12 @@ const AboutMentor = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 ">
-                <Button className="bg-primary hover:bg-primary/90 text-white px-6 md:px-8 lg:px-12 py-3 text-sm md:text-base font-medium cursor-pointer">
+                <Button
+                  className=" px-6 md:px-8 lg:px-12 py-3 text-sm md:text-base font-medium cursor-pointer"
+                  icon={<ArrowRight className="w-5 h-5" />}
+                  iconPosition="right"
+                >
                   Get Free Guide Now + Join Waitlist
-                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
                 <Button
                   variant="outline"

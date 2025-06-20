@@ -9,16 +9,24 @@ import { calculateReadTime } from "@/sanity/utils/readTime";
 import PortableRenderer from "../shared/PortableRenderer";
 import { getPlainTextFromPortableText } from "@/sanity/utils/getPlainTextFromPortableText";
 
-export default function BlogSingle({ blog, relatedBlogs }) {
-  // console.log("current blog", blog);
-
+export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
   const plainText = getPlainTextFromPortableText(blog.content);
   const readTime = calculateReadTime(plainText);
 
-  // related blogs
+  // console.log("current blog", blog);
+  // console.log("relatedBlogs", relatedBlogs);
+  // console.log("blogsMeta", blogsMeta);
+  const currentIndex = blogsMeta.findIndex(
+    (item) => item?.slug?.current === blog.slug
+  );
+  const nextBlog =
+    blogsMeta.length - 1 === currentIndex
+      ? blogsMeta[0]
+      : blogsMeta[currentIndex + 1] || null;
 
-  console.log("relatedBlogs", relatedBlogs);
-
+  console.log("blogMeta---", blogsMeta.length - 1);
+  console.log("currentIndex", currentIndex);
+  console.log("nextBlog", nextBlog, currentIndex + 1);
   return (
     <div className="root-layout min-h-screen ">
       {/* Hero Section */}
@@ -87,15 +95,28 @@ export default function BlogSingle({ blog, relatedBlogs }) {
             </div>
 
             {/* Navigation */}
-            <div className="flex justify-between items-center mt-16 pt-8 border-t border-primary/10">
-              <Button variant="outline" className="flex items-center">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Older Post
-              </Button>
-              <Button variant="outline" className="flex items-center">
-                Newer Post
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+            <div className="flex justify-end items-center mt-16 pt-8 border-t border-primary/10">
+              <Link href={`/blog/${nextBlog?.slug?.current}`}>
+                <Button
+                  variant="outline"
+                  className="flex align-items-end h-auto bg-primary/10 hover:bg-primary/20"
+                  icon={<ArrowRight className="w-4 h-4 ml-2" />}
+                  iconPosition="right"
+                >
+                  {nextBlog && (
+                    <div className="flex flex-col justify-content-end align-items-end gap-1 text-start">
+                      <span className="text-sm text-text-light font-medium">
+                        Next Post:
+                      </span>
+                      <span className="text-base font-semibold">
+                        {nextBlog.title.length > 30
+                          ? `${nextBlog.title.slice(0, 30)}...`
+                          : nextBlog.title}
+                      </span>
+                    </div>
+                  )}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

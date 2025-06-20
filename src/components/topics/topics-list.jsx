@@ -77,11 +77,11 @@ const TopicsList = ({ blogs, topics }) => {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-8">
-              <h1 className="text-2xl md:text-3xl font-heading text-foreground mb-6">
+              <h1 className="text-3xl ms-2 font-heading text-foreground mb-6">
                 Topics
               </h1>
 
-              {/* Categories */}
+              {/* Topics */}
               <div className="space-y-3">
                 <Button
                   variant={activeTopic === "all" ? "default" : "ghost"}
@@ -103,12 +103,12 @@ const TopicsList = ({ blogs, topics }) => {
                   <Button
                     key={topic._id}
                     variant={activeTopic === topic._id ? "default" : "ghost"}
-                    className="w-full justify-start text-left h-auto p-4 rounded-xl cursor-pointer"
+                    className="w-full justify-start text-left h-auto p-4 rounded-xl cursor-pointer "
                     onClick={() => setActiveTopic(topic._id)}
                   >
                     <div className="flex items-center w-full">
                       <div
-                        className={`w-3 h-3 rounded-full bg-gradient-to-r from-primary to-secondary mr-3`}
+                        className={`w-3 h-3 rounded-full bg-gradient-to-r from-secondary to-primary mr-3`}
                       />
                       <div className="flex-1">
                         <div className="font-medium">{topic.title}</div>
@@ -249,6 +249,7 @@ const BlogCard = ({ blog, variant = "grid" }) => {
               alt={blog.title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
           <div className="flex-1 min-w-0">
@@ -300,6 +301,7 @@ const BlogCard = ({ blog, variant = "grid" }) => {
             alt={blog.title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
         <div className="p-4">

@@ -10,7 +10,7 @@ const BlogListItem = ({ blog }) => {
   return (
     <Link href={`/blog/${blog.slug.current}`}>
       <article className="group grid md:grid-cols-2 gap-8 items-center bg-foreground/10 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer hover:-translate-y-1">
-        <div className="aspect-[4/3] relative overflow-hidden">
+        <div className="aspect-[4/3] relative overflow-hidden sm:rounded-2xl">
           <Image
             src={
               urlForImage(blog.coverImage.asset._ref).url() ||
@@ -19,10 +19,11 @@ const BlogListItem = ({ blog }) => {
             alt={blog.title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
 
-        <div className="p-6 md:p-8">
+        <div className="p-6 pt-2 md:p-8">
           {/* Meta */}
           <div className="flex items-center gap-4 mb-4 text-sm text-text-light">
             <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">

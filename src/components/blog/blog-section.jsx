@@ -14,7 +14,7 @@ const BlogSection = async () => {
     <section>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-3xl md:text-4xl font-heading text-center lg:text-start text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-heading text-center md:text-start text-foreground mb-4">
             Latest Articles
           </h2>
           <p className="text-text-light text-lg text-center lg:text-start leading-tight">

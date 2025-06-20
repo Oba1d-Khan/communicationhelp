@@ -37,6 +37,8 @@ export const ALL_BLOGS_QUERY = `*[_type == "blog"] | order(publishedAt desc) {
   content
 }`
 
+export const ALL_BLOGS_META_QUERY = `*[_type == "blog"]{title, slug, publishedAt}`
+
 export const BLOG_BY_SLUG_QUERY = `
   *[_type == "blog" && slug.current == $slug][0] {
     title,
