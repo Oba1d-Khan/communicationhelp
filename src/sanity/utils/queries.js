@@ -56,7 +56,7 @@ export const RELATED_BLOGS_QUERY = `
   ]
   | order(publishedAt desc)[0...2] {
     title,
-    "slug": slug.current,
+    "slug": slug,
     excerpt,
     coverImage,
     publishedAt,
