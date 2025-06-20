@@ -2,6 +2,8 @@ import TopicCard from "@/components/topics/topic-card";
 import TopicsList from "@/components/topics/topics-list";
 import Topics from "@/components/topics/topics-list";
 import { topics } from "@/constants/constants";
+import { client } from "@/sanity/client";
+import { ALL_BLOGS_QUERY, ALL_TOPICS_QUERY } from "@/sanity/utils/queries";
 
 export const metadata = {
   title: "Topics | Bruce Lambert - Communication & Persuasion",
@@ -9,7 +11,12 @@ export const metadata = {
     "Explore articles on persuasion, listening, empathy, leadership, and communication by Bruce Lambert, Ph.D.",
 };
 
-export default function TopicsPage() {
+const options = { next: { revalidate: 60 } };
+export default async function TopicsPage() {
+  const blogs = await client.fetch(ALL_BLOGS_QUERY, options);
+
+  // fetch topics
+  const topics = await client.fetch(ALL_TOPICS_QUERY, options);
   return (
     <main className="root-layout ">
       {/* Hero Section */}
@@ -47,7 +54,7 @@ export default function TopicsPage() {
       </section> */}
 
       <section>
-        <TopicsList />
+        <TopicsList blogs={blogs} topics={topics} />
       </section>
     </main>
   );
