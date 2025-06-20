@@ -30,7 +30,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
   return (
     <div className="root-layout min-h-screen ">
       {/* Hero Section */}
-      <section className="relative pt-20  md:pt-32 md:pb-20">
+      <section className="relative pt-20  md:pt-32 md:pb-0">
         <div className="container">
           <div className="max-w-4xl mx-auto">
             {/* Back button */}
@@ -105,8 +105,8 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
                 >
                   {nextBlog && (
                     <div className="flex flex-col justify-content-end align-items-end gap-1 text-start">
-                      <span className="text-sm text-text-light font-medium">
-                        Next Post:
+                      <span className="text-sm text-text-light/80 font-medium ">
+                        Next
                       </span>
                       <span className="text-base font-semibold">
                         {nextBlog.title.length > 30
@@ -123,7 +123,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
       </section>
 
       {/* Related Posts */}
-      <section className="py-20 bg-primary/5">
+      <section className="py-20 ">
         <div className="container">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-heading text-foreground mb-12 text-center">
