@@ -1,7 +1,18 @@
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Heart, Ear, MessageCircle } from "lucide-react";
 
-export const navLinks = [
+export const navLinks = {
+  left: [
+    { title: "Topics", href: "/topics", hasDropdown: true },
+    { title: "Blog", href: "/blog", hasDropdown: false },
+  ],
+  right: [
+    { title: "About", href: "/about", hasDropdown: false },
+    { title: "Connect", href: "/connect", hasDropdown: false },
+  ],
+};
+
+export const footerLinks = [
   {
     title: "Home",
     href: "/",

@@ -2,6 +2,7 @@ import { Mona_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import NavbarNew from "@/components/layout/NavbarNew";
 
 const monaSans = Mona_Sans({
   variable: "--font-mona-sans",
@@ -28,7 +29,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${monaSans.variable} ${dmSerif.variable} font-dm-sans   antialiased`}
       >
-        <Navbar />
+        <NavbarNew />
         {children}
         <Footer />
       </body>

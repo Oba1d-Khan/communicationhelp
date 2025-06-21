@@ -1,5 +1,5 @@
 import React from "react";
-import { navLinks, socials } from "@/constants/constants";
+import { footerLinks, socials } from "@/constants/constants";
 import Link from "next/link";
 
 const Footer = () => {
@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="w-full border-t border-gray-300 ">
       <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-          {navLinks.map((item) => (
+          {footerLinks.map((item) => (
             <Link
               key={item.title}
               href={item.href}
