@@ -14,18 +14,28 @@ html {
   --font-heading: var(--font-dm-serif-display);
 
   /* Light Theme (Default) */
-  --color-background: #E7EFC7;
-  --color-foreground: #242419;
+  --color-background: #faf9f6;
+  /* light ivory */
+  --color-foreground: #2c2a26;
+  /* deep charcoal */
 
-  --color-primary: #3B3B1A;
-  --color-primary-foreground: #f1f5f9;
-  --color-secondary: #8A784E;
+  --color-primary: #6c5e53;
+  /* warm brown/stone */
+  --color-primary-foreground: #faf9f6;
+  --color-secondary: #c7b198;
+  /* soft beige */
+  --color-secondary2: #9da7a0;
+  /* sage green-gray */
 
-  --color-success: #10b981;
-  --color-destructive: #ef4444;
+  --color-success: #7ba173;
+  /* gentle green */
+  --color-destructive: #c25f5a;
+  /* muted red */
 
-  --color-muted: #cbd5e1;
-  --color-text-light: #362e1f;
+  --color-muted: #e0d8cf;
+  --color-text-light: #665e54;
+
+
 
   /* Dark Theme */
   --color-background-dark: #0f172a;
@@ -65,7 +75,7 @@ html {
 /* Base Styles */
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans text-shadow-sm;
   }
 
   h1,
@@ -100,13 +110,23 @@ html {
 /* Components */
 @layer components {
   .container {
-    @apply w-[80vw] max-w-screen-xl mx-auto;
+    @apply w-[85vw] max-w-screen-xl mx-auto;
   }
 
+  /* Updated root-layout for content only, no backgrounds */
   .root-layout {
-    @apply max-w-7xl mx-auto flex flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
+    @apply max-w-7xl mx-auto flex flex-col gap-16 px-8 max-sm:px-4;
   }
 
+  /* Full-width section wrapper */
+  .section-wrapper {
+    @apply w-full;
+  }
+
+  /* Content container for sections */
+  .section-content {
+    @apply max-w-7xl mx-auto px-8 max-sm:px-4;
+  }
 }
 
 /* Utilities */

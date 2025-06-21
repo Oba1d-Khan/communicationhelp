@@ -16,9 +16,6 @@ const popularSearches = [
 // Topics dropdown items
 const topicsDropdown = [
   { title: "Persuasion", href: "/topics/persuasion" },
-  // { title: "Leadership", href: "/topics/leadership" },
-  // { title: "Communication", href: "/topics/communication" },
-  // { title: "Psychology", href: "/topics/psychology" },
   { title: "Empathy", href: "/topics/empathy" },
   { title: "Listening", href: "/topics/listening" },
 ];
@@ -57,8 +54,8 @@ const ModernNavbar = () => {
       <header
         className={`sticky top-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#edf3d4]/95 backdrop-blur-md border-b border-[#c5d49a]/40 shadow-lg"
-            : "bg-[#edf3d4] border-b border-[#d4d4aa]/20"
+            ? "bg-background/75 backdrop-blur-md border-b border-primary/20 shadow-lg"
+            : "bg-primary/10 border-b border-primary/10"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,7 +71,7 @@ const ModernNavbar = () => {
                 >
                   {/* Search Button - Always visible */}
                   <button
-                    className="flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium text-[#2d3319] hover:text-[#1a1f0f] hover:bg-gradient-to-r hover:from-[#d4d4aa]/30 hover:to-[#c5d49a]/40 transition-all duration-300 border border-transparent hover:border-[#c5d49a]/30 whitespace-nowrap"
+                    className="flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium text-foreground hover:text-primary hover:bg-gradient-to-r hover:from-secondary/20 hover:to-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20 whitespace-nowrap"
                     onClick={handleSearchExpand}
                   >
                     <Search size={16} />
@@ -94,17 +91,17 @@ const ModernNavbar = () => {
                         <div className="relative">
                           <Search
                             size={16}
-                            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#6b7c3a] z-10"
+                            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-light z-10"
                           />
                           <input
                             type="search"
                             placeholder="Search articles, topics..."
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
-                            className="w-full pl-12 pr-4 py-2.5 bg-white/95 backdrop-blur-sm border-2 border-[#c5d49a]/50 rounded-xl text-sm text-[#2d3319] placeholder-[#6b7c3a]/70 focus:outline-none focus:ring-2 focus:ring-[#8a9b4a]/50 focus:border-[#8a9b4a] focus:bg-white transition-all duration-300 shadow-lg focus:shadow-xl"
+                            className="w-full pl-12 pr-4 py-2.5 bg-white/95 backdrop-blur-sm border-2 border-primary/30 rounded-xl text-sm text-foreground placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-300 shadow-lg focus:shadow-xl"
                             autoFocus
                           />
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#f5f9e8]/20 to-[#edf3d4]/20 rounded-xl pointer-events-none" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-primary/5 rounded-xl pointer-events-none" />
                         </div>
                       </motion.div>
                     )}
@@ -127,7 +124,7 @@ const ModernNavbar = () => {
                   >
                     <Link
                       href={item.href}
-                      className="group flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-[#2d3319] hover:text-[#1a1f0f] hover:bg-gradient-to-r hover:from-[#d4d4aa]/30 hover:to-[#c5d49a]/40 transition-all duration-300 border border-transparent hover:border-[#c5d49a]/30"
+                      className="group flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-foreground hover:text-primary hover:bg-gradient-to-r hover:from-secondary/20 hover:to-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20"
                     >
                       {item.title}
                       {item.hasDropdown && (
@@ -151,7 +148,7 @@ const ModernNavbar = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -10, scale: 0.95 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md border border-[#c5d49a]/40 rounded-xl shadow-xl z-50"
+                            className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md border border-primary/20 rounded-xl shadow-xl z-50"
                           >
                             <div className="p-2">
                               {topicsDropdown.map((topic, index) => (
@@ -163,7 +160,7 @@ const ModernNavbar = () => {
                                 >
                                   <Link
                                     href={topic.href}
-                                    className="block px-4 py-3 text-sm font-medium text-[#2d3319] hover:text-[#1a1f0f] hover:bg-gradient-to-r hover:from-[#d4d4aa]/30 hover:to-[#c5d49a]/40 rounded-lg transition-all duration-200"
+                                    className="block px-4 py-3 text-sm font-medium text-foreground hover:text-primary hover:bg-gradient-to-r hover:from-secondary/20 hover:to-primary/10 rounded-lg transition-all duration-200"
                                   >
                                     {topic.title}
                                   </Link>
@@ -182,7 +179,7 @@ const ModernNavbar = () => {
             {/* Center Logo - Absolutely centered */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <Link href="/" className="flex items-center group">
-                <div className="text-2xl font-bold text-[#2d3319] group-hover:text-[#1a1f0f] transition-all duration-300 group-hover:scale-105">
+                <div className="text-2xl font-bold text-foreground group-hover:text-primary transition-all duration-300 group-hover:scale-105">
                   Bruce Lambert.
                 </div>
               </Link>
@@ -196,7 +193,7 @@ const ModernNavbar = () => {
                   <Link
                     key={item.title}
                     href={item.href}
-                    className="group flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-[#2d3319] hover:text-[#1a1f0f] hover:bg-gradient-to-r hover:from-[#d4d4aa]/30 hover:to-[#c5d49a]/40 transition-all duration-300 border border-transparent hover:border-[#c5d49a]/30"
+                    className="group flex items-center px-4 py-2.5 rounded-xl text-sm font-medium text-foreground hover:text-primary hover:bg-gradient-to-r hover:from-secondary/20 hover:to-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20"
                   >
                     {item.title}
                     {item.hasDropdown && (
@@ -213,8 +210,8 @@ const ModernNavbar = () => {
                     variant={isScrolled ? "default" : "outline"}
                     className={`ml-4 rounded-xl px-6 py-2.5 text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                       isScrolled
-                        ? "bg-[#6b7c3a] text-white hover:bg-[#5a6b31] shadow-lg hover:shadow-xl"
-                        : "border-2 border-[#6b7c3a] text-[#6b7c3a] bg-transparent hover:bg-[#6b7c3a] hover:text-white shadow-sm hover:shadow-md"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl"
+                        : "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-md"
                     }`}
                   >
                     Recommended Readings
@@ -225,7 +222,7 @@ const ModernNavbar = () => {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden p-2.5 rounded-xl text-[#2d3319] hover:bg-gradient-to-r hover:from-[#d4d4aa]/30 hover:to-[#c5d49a]/40 transition-all duration-300 border border-transparent hover:border-[#c5d49a]/30"
+                className="lg:hidden p-2.5 rounded-xl text-foreground hover:bg-gradient-to-r hover:from-secondary/20 hover:to-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -256,43 +253,43 @@ const ModernNavbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-full max-w-sm bg-[#edf3d4]/98 backdrop-blur-md shadow-2xl border-l border-[#c5d49a]/40"
+              className="absolute right-0 top-0 h-full w-full max-w-sm bg-background/98 backdrop-blur-md shadow-2xl border-l border-primary/20"
             >
               {/* Header with Close Button */}
-              <div className="flex items-center justify-between p-6 border-b border-[#c5d49a]/30">
-                <div className="text-xl font-bold text-[#2d3319]">Menu</div>
+              <div className="flex items-center justify-between p-6 border-b border-primary/20">
+                <div className="text-xl font-bold text-foreground">Menu</div>
                 <button
                   onClick={closeMobileMenu}
-                  className="p-2 rounded-xl text-[#2d3319] hover:bg-[#d4d4aa]/40 transition-colors duration-200"
+                  className="p-2 rounded-xl text-foreground hover:bg-secondary/30 transition-colors duration-200"
                 >
                   <X size={20} />
                 </button>
               </div>
 
               {/* Search Bar */}
-              <div className="p-6 border-b border-[#c5d49a]/30">
+              <div className="p-6 border-b border-primary/20">
                 <div className="relative w-full">
                   <Search
                     size={18}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#6b7c3a]"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-light"
                   />
                   <input
                     type="search"
                     placeholder="Search articles, topics..."
-                    className="w-full pl-12 pr-4 py-3.5 bg-white/90 backdrop-blur-sm border-2 border-[#c5d49a]/50 rounded-xl text-base text-[#2d3319] placeholder-[#6b7c3a]/70 focus:outline-none focus:ring-2 focus:ring-[#8a9b4a]/50 focus:border-[#8a9b4a] focus:bg-white transition-all duration-300"
+                    className="w-full pl-12 pr-4 py-3.5 bg-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl text-base text-foreground placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-300"
                   />
                 </div>
 
                 {/* Popular Searches */}
                 <div className="mt-4">
-                  <p className="text-xs font-medium text-[#6b7c3a] mb-3">
+                  <p className="text-xs font-medium text-text-light mb-3">
                     Popular searches:
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {popularSearches.map((term) => (
                       <button
                         key={term}
-                        className="px-3 py-1.5 bg-[#d4d4aa]/60 text-[#2d3319] text-xs rounded-full hover:bg-[#c5d49a]/70 transition-all duration-200 border border-[#c5d49a]/30"
+                        className="px-3 py-1.5 bg-secondary/40 text-foreground text-xs rounded-full hover:bg-secondary/60 transition-all duration-200 border border-primary/20"
                       >
                         {term}
                       </button>
@@ -313,7 +310,7 @@ const ModernNavbar = () => {
                     >
                       {item.title === "Topics" && item.hasDropdown ? (
                         <div className="space-y-2">
-                          <div className="flex items-center justify-between p-4 rounded-xl text-base font-medium text-[#2d3319] hover:bg-gradient-to-r hover:from-[#d4d4aa]/40 hover:to-[#c5d49a]/50 transition-all duration-200 border border-transparent hover:border-[#c5d49a]/30">
+                          <div className="flex items-center justify-between p-4 rounded-xl text-base font-medium text-foreground hover:bg-gradient-to-r hover:from-secondary/30 hover:to-primary/15 transition-all duration-200 border border-transparent hover:border-primary/20">
                             <Link
                               href={item.href}
                               onClick={closeMobileMenu}
@@ -329,7 +326,9 @@ const ModernNavbar = () => {
                             >
                               <ChevronDown
                                 size={16}
-                                className={`opacity-60 transition-transform duration-200 ${mobileTopicsOpen ? "rotate-180" : ""}`}
+                                className={`opacity-60 transition-transform duration-200 ${
+                                  mobileTopicsOpen ? "rotate-180" : ""
+                                }`}
                               />
                             </button>
                           </div>
@@ -347,7 +346,7 @@ const ModernNavbar = () => {
                                     key={topic.title}
                                     href={topic.href}
                                     onClick={closeMobileMenu}
-                                    className="block p-3 text-sm text-[#2d3319]/80 hover:text-[#2d3319] hover:bg-[#d4d4aa]/30 rounded-lg transition-all duration-200"
+                                    className="block p-3 text-sm text-text-light hover:text-foreground hover:bg-secondary/20 rounded-lg transition-all duration-200"
                                   >
                                     {topic.title}
                                   </Link>
@@ -360,7 +359,7 @@ const ModernNavbar = () => {
                         <Link
                           href={item.href}
                           onClick={closeMobileMenu}
-                          className="group flex items-center justify-between p-4 rounded-xl text-base font-medium text-[#2d3319] hover:bg-gradient-to-r hover:from-[#d4d4aa]/40 hover:to-[#c5d49a]/50 transition-all duration-200 active:scale-95 border border-transparent hover:border-[#c5d49a]/30"
+                          className="group flex items-center justify-between p-4 rounded-xl text-base font-medium text-foreground hover:bg-gradient-to-r hover:from-secondary/30 hover:to-primary/15 transition-all duration-200 active:scale-95 border border-transparent hover:border-primary/20"
                         >
                           {item.title}
                           {item.hasDropdown && (
@@ -377,9 +376,9 @@ const ModernNavbar = () => {
               </div>
 
               {/* CTA Button */}
-              <div className="p-6 border-t border-[#c5d49a]/30">
+              <div className="p-6 border-t border-primary/20">
                 <Link href="/recommended-readings" onClick={closeMobileMenu}>
-                  <Button className="w-full py-4 bg-[#6b7c3a] text-white hover:bg-[#5a6b31] rounded-xl text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95">
+                  <Button className="w-full py-4 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95">
                     Recommended Readings
                   </Button>
                 </Link>

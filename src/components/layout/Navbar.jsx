@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { ChevronDown, ChevronRight } from "lucide-react";
 import { navLinks } from "@/constants/constants";
 import { Menu, Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
