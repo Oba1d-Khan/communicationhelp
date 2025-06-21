@@ -59,7 +59,7 @@ const ModernNavbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
+          <div className="relative flex items-center justify-between h-18">
             {/* Left Section - Search + Left Nav */}
             <div className="flex items-center space-x-6">
               {/* Search - Desktop */}
@@ -179,7 +179,7 @@ const ModernNavbar = () => {
             {/* Center Logo - Absolutely centered */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <Link href="/" className="flex items-center group">
-                <div className="text-2xl font-bold text-foreground group-hover:text-primary transition-all duration-300 group-hover:scale-105">
+                <div className="text-lg lg:text-2xl font-bold text-foreground group-hover:text-primary transition-all duration-300 group-hover:scale-105">
                   Bruce Lambert.
                 </div>
               </Link>
@@ -256,14 +256,14 @@ const ModernNavbar = () => {
               className="absolute right-0 top-0 h-full w-full max-w-sm bg-background/98 backdrop-blur-md shadow-2xl border-l border-primary/20"
             >
               {/* Header with Close Button */}
-              <div className="flex items-center justify-between p-6 border-b border-primary/20">
-                <div className="text-xl font-bold text-foreground">Menu</div>
+              <div className="flex items-center justify-between p-6 border-b border-primary/20 h-18">
+                {/* <div className="text-xl font-bold text-foreground">Menu</div>
                 <button
                   onClick={closeMobileMenu}
                   className="p-2 rounded-xl text-foreground hover:bg-secondary/30 transition-colors duration-200"
                 >
                   <X size={20} />
-                </button>
+                </button> */}
               </div>
 
               {/* Search Bar */}

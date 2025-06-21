@@ -134,7 +134,7 @@ const AboutMentor = () => {
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-20 items-center"
         >
           {/* Left Column - Content */}
-          <div className="lg:col-span-7 space-y-6 md:space-y-8 w-[90%]">
+          <div className="lg:col-span-7 space-y-6 md:space-y-8 lg:w-[90%]">
             {/* Enhanced Badge */}
             <motion.div
               variants={itemVariants}

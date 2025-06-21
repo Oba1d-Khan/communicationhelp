@@ -233,19 +233,19 @@ const Hero = () => {
           {/* Enhanced Hero Image Section */}
           <motion.div
             variants={itemVariants}
-            className="relative max-w-7xl mx-auto"
+            className="relative max-w-7xl mx-auto "
           >
             {/* Background Glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-3xl blur-3xl scale-105 animate-pulse" />
 
             {/* Main Image Container */}
-            <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl group ">
               <Image
                 src={heroImg || "/placeholder.svg?height=720&width=1280"}
                 width={1280}
                 height={720}
                 alt="Professor teaching communication skills"
-                className="w-full h-[500px] md:h-[600px] lg:h-[700px] object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-[700px] md:h-[600px] lg:h-[700px] object-cover transition-transform duration-500 group-hover:scale-105"
                 priority
               />
 
@@ -286,7 +286,6 @@ const Hero = () => {
                     >
                       <Play className="w-5 h-5 mr-2" />
                       Watch Preview
-                      <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
 
                     <Button
