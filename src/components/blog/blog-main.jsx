@@ -1,10 +1,10 @@
 "use client";
 import { useState, useMemo } from "react";
-import Link from "next/link";
 import BlogSlider from "@/components/blog/blog-slider";
 import BlogCard from "@/components/blog/blog-card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Filter, Search } from "lucide-react";
+import { Filter, Search, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Select,
   SelectContent,
@@ -27,7 +27,7 @@ export default function BlogMain({ blogs, topics }) {
     { value: "popular", label: "Most Popular" },
   ];
 
-  // Filter and sort blogs
+  // Filter and sort blogs with performance optimization
   const filteredAndSortedBlogs = useMemo(() => {
     const filtered = blogs.filter((blog) => {
       const matchesTopic =
@@ -40,7 +40,6 @@ export default function BlogMain({ blogs, topics }) {
       return matchesTopic && matchesSearch;
     });
 
-    // Sort the filtered results
     const sorted = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case "newest":
@@ -67,196 +66,236 @@ export default function BlogMain({ blogs, topics }) {
     return blogs.filter((blog) => blog.featured);
   }, [blogs]);
 
+  const clearFilters = () => {
+    setSearchQuery("");
+    setSelectedTopic("All");
+    setSortBy("newest");
+  };
+
+  // Lightning-fast animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.02, // Super minimal stagger
+        delayChildren: 0,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.2, // Very fast
+        ease: [0.4, 0, 0.2, 1],
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Hero Slider Section */}
-      <section className="pb-2 md:pt-0 md:pb-12">
-        <div className="">
-          <div className="">
-            <BlogSlider featuredBlogs={featured} />
-          </div>
-        </div>
+      <section className="section-wrapper">
+        <BlogSlider featuredBlogs={featured} />
       </section>
 
-      {/* Recent Posts Section */}
-      <section className="root-layout pb-16 md:pb-24">
-        <div className="">
-          <div className="">
-            {/* All Posts Section */}
-            <section className="pb-20 md:pb-32">
-              <div className="container">
-                <div className="max-w-6xl mx-auto">
-                  {/* Filters and Search */}
-                  <div className="flex flex-col md:flex-row gap-4 mb-12 items-center justify-between">
-                    {/* Search */}
-                    <div className="relative w-[90%] mb-3 md:mb-0 md:px-0 md:w-auto md:min-w-[320px]">
-                      <Search
-                        strokeWidth={2}
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary w-5 h-5"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Search articles or topics..."
-                        className="w-full pl-11 pr-4 py-3 md:py-[5px] border border-primary/50 rounded-full bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/30 text-base transition-all duration-200 hover:border-primary/70 focus:bg-background"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                      />
-                    </div>
-
-                    {/* Filters */}
-                    <div className="flex flex-col lg:flex-row gap-3 items-center">
-                      <div className="flex items-center gap-2">
-                        <Filter className="w-4 h-4 text-text-light" />
-                        <span className="text-sm text-text-light font-medium">
-                          Filter by:
-                        </span>
-                      </div>
-
-                      {/* Topic Filter */}
-                      <Select
-                        value={selectedTopic}
-                        onValueChange={setSelectedTopic}
-                        // className="bg-primary"
-                      >
-                        <SelectTrigger className="w-[180px] border-primary/50 rounded-full bg-primary/5 hover:border-primary/70 focus:ring-2 focus:ring-primary/30 transition-all duration-200 cursor-pointer">
-                          <SelectValue placeholder="All Topics" />
-                        </SelectTrigger>
-                        <SelectContent className="rounded-xl border-primary/30 bg-background shadow-lg">
-                          {topicOptions.map((topic) => (
-                            <SelectItem
-                              key={topic.slug || topic.title}
-                              value={topic.title}
-                              className="rounded-lg hover:bg-primary/10 focus:bg-primary/10 cursor-pointer transition-colors duration-150"
-                            >
-                              {topic.title}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-
-                      {/* Sort Filter */}
-                      <Select value={sortBy} onValueChange={setSortBy}>
-                        <SelectTrigger className="w-[160px] border-primary/50 rounded-full bg-primary/5 hover:border-primary/70 focus:ring-2 focus:ring-primary/30 transition-all duration-200 cursor-pointer">
-                          <SelectValue placeholder="Sort by" />
-                        </SelectTrigger>
-                        <SelectContent className="rounded-xl border-primary/30 bg-background shadow-lg">
-                          {sortOptions.map((option) => (
-                            <SelectItem
-                              key={option.value}
-                              value={option.value}
-                              className="rounded-lg hover:bg-primary/10 focus:bg-primary/10 cursor-pointer transition-colors duration-150"
-                            >
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  {/* Results count */}
-                  <div className="mb-8">
-                    <p className="text-text-light">
-                      Showing{" "}
-                      <span className="font-semibold text-foreground">
-                        {filteredAndSortedBlogs.length}
-                      </span>{" "}
-                      article{filteredAndSortedBlogs.length !== 1 ? "s" : ""}
-                      {selectedTopic !== "All" && (
-                        <span>
-                          {" "}
-                          in{" "}
-                          <span className="font-semibold text-primary">
-                            {selectedTopic}
-                          </span>
-                        </span>
-                      )}
-                      {searchQuery && (
-                        <span>
-                          {" "}
-                          for "
-                          <span className="font-semibold text-primary">
-                            {searchQuery}
-                          </span>
-                          "
-                        </span>
-                      )}
-                    </p>
-                  </div>
-
-                  {/* Blog Grid */}
-                  {filteredAndSortedBlogs.length > 0 ? (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                      {filteredAndSortedBlogs.map((blog, index) => (
-                        <BlogCard key={blog.id || index} blog={blog} />
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-16">
-                      <div className="max-w-md mx-auto">
-                        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Search className="w-8 h-8 text-primary/60" />
-                        </div>
-                        <h3 className="text-xl font-heading text-foreground mb-2">
-                          No articles found
-                        </h3>
-                        <p className="text-text-light mb-6">
-                          Try adjusting your search terms or filters to find
-                          what you're looking for.
-                        </p>
-                        <Button
-                          variant="outline"
-                          onClick={() => {
-                            setSearchQuery("");
-                            setSelectedTopic("All");
-                            setSortBy("newest");
-                          }}
-                          className="rounded-full"
-                        >
-                          Clear Filters
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Load More Button - Only show if there are results */}
-                  {filteredAndSortedBlogs.length > 0 && (
-                    <div className="text-center mt-16">
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        className="px-8 rounded-full border-primary/50 hover:border-primary hover:bg-primary/5 transition-all duration-200"
-                      >
-                        Load More Articles
-                      </Button>
-                    </div>
+      {/* Main Content */}
+      <section className="section-wrapper">
+        <div className="section-content py-16 md:py-20 lg:py-24">
+          <div className="max-w-7xl mx-auto animate-fadeIn">
+            {/* Filters and Search - Instant appearance */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 mb-8 border border-primary/10 shadow-lg">
+              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+                {/* Search */}
+                <div className="relative w-full lg:w-auto lg:min-w-[320px]">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-light w-5 h-5" />
+                  <input
+                    type="text"
+                    placeholder="Search articles or topics..."
+                    className="w-full pl-12 pr-10 py-3 border-2 border-primary/20 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-base transition-all duration-150 hover:border-primary/40"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-light hover:text-primary transition-colors duration-150"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
                   )}
                 </div>
+
+                {/* Filters */}
+                <div className="flex flex-col sm:flex-row gap-4 items-center">
+                  <div className="flex items-center gap-2">
+                    <Filter className="w-4 h-4 text-text-light" />
+                    <span className="text-sm text-text-light font-medium">
+                      Filter by:
+                    </span>
+                  </div>
+
+                  {/* Topic Filter */}
+                  <Select
+                    value={selectedTopic}
+                    onValueChange={setSelectedTopic}
+                  >
+                    <SelectTrigger className="w-[180px] border-primary/30 rounded-full bg-white hover:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-150">
+                      <SelectValue placeholder="All Topics" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl border-primary/20 bg-white shadow-xl">
+                      {topicOptions.map((topic) => (
+                        <SelectItem
+                          key={topic.slug || topic.title}
+                          value={topic.title}
+                          className="rounded-lg hover:bg-primary/10 focus:bg-primary/10 transition-colors duration-100"
+                        >
+                          {topic.title}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  {/* Sort Filter */}
+                  <Select value={sortBy} onValueChange={setSortBy}>
+                    <SelectTrigger className="w-[160px] border-primary/30 rounded-full bg-white hover:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-150">
+                      <SelectValue placeholder="Sort by" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl border-primary/20 bg-white shadow-xl">
+                      {sortOptions.map((option) => (
+                        <SelectItem
+                          key={option.value}
+                          value={option.value}
+                          className="rounded-lg hover:bg-primary/10 focus:bg-primary/10 transition-colors duration-100"
+                        >
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-            </section>
+            </div>
+
+            {/* Results count - Instant */}
+            <div className="mb-6">
+              <p className="text-text-light text-lg">
+                Showing{" "}
+                <span className="font-semibold text-foreground">
+                  {filteredAndSortedBlogs.length}
+                </span>{" "}
+                article
+                {filteredAndSortedBlogs.length !== 1 ? "s" : ""}
+                {selectedTopic !== "All" && (
+                  <span>
+                    {" "}
+                    in{" "}
+                    <span className="font-semibold text-primary">
+                      {selectedTopic}
+                    </span>
+                  </span>
+                )}
+                {searchQuery && (
+                  <span>
+                    {" "}
+                    for "
+                    <span className="font-semibold text-primary">
+                      {searchQuery}
+                    </span>
+                    "
+                  </span>
+                )}
+              </p>
+            </div>
+
+            {/* Blog Grid - Ultra-fast transitions */}
+            <AnimatePresence mode="wait">
+              {filteredAndSortedBlogs.length > 0 ? (
+                <motion.div
+                  key="blog-grid"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+                >
+                  {filteredAndSortedBlogs.map((blog, index) => (
+                    <BlogCard
+                      key={blog.id || index}
+                      blog={blog}
+                      index={index}
+                    />
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="no-results"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-center py-16"
+                >
+                  <div className="max-w-md mx-auto bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-primary/10 shadow-lg">
+                    <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Search className="w-8 h-8 text-primary/60" />
+                    </div>
+                    <h3 className="text-2xl font-heading text-foreground mb-3">
+                      No articles found
+                    </h3>
+                    <p className="text-text-light mb-6 leading-relaxed">
+                      Try adjusting your search terms or filters to find what
+                      you're looking for.
+                    </p>
+                    <Button
+                      variant="outline"
+                      onClick={clearFilters}
+                      className="rounded-full border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+                    >
+                      Clear Filters
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Load More Button */}
+            {filteredAndSortedBlogs.length > 0 && (
+              <div className="text-center mt-12 animate-fadeIn">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-8 py-4 rounded-full border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 shadow-lg hover:shadow-xl"
+                >
+                  Load More Articles
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* Newsletter CTA Section */}
-      <section className="py-16 md:py-24 bg-primary/5">
-        <div className="container px-4 md:px-0">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-6">
+      <section className="section-wrapper bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10">
+        <div className="section-content py-16 md:py-20">
+          <div className="max-w-4xl mx-auto text-center animate-slideUp">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-foreground mb-6 leading-tight">
               Never Miss an Insight
             </h2>
-            <p className="text-text-light text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-text-light text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
               Get the latest articles on communication, empathy, and human
-              connection delivered directly to your inbox. Join thousands of
-              readers who are transforming their relationships.
+              connection delivered directly to your inbox.
             </p>
-            <div className="flex flex-col aic jcc sm:flex-row gap-4 max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-2 border border-primary/30 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all duration-200"
+                className="flex-1 px-6 py-4 border-2 border-primary/20 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 text-base"
               />
-              <Button className="px-8 py-3 rounded-full bg-primary hover:bg-primary/90 transition-all duration-200">
+              <Button className="px-8 py-4 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 shadow-lg hover:shadow-xl font-medium">
                 Subscribe
               </Button>
             </div>

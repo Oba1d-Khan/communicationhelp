@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { navLinks } from "@/constants/constants";
 import { Menu, Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,6 +11,12 @@ const topicItems = [
   { title: "Empathy", href: "/topics/empathy" },
 ];
 
+const navLinks = [
+  { title: "Topics", href: "/topics", hasDropdown: true },
+  { title: "Blog", href: "/blog", hasDropdown: false },
+  { title: "About", href: "/about", hasDropdown: false },
+  { title: "Connect", href: "/connect", hasDropdown: false },
+];
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 

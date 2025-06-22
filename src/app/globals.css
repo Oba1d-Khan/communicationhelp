@@ -15,38 +15,23 @@ html {
 
   /* Light Theme (Default) */
   --color-background: #faf9f6;
-  /* light ivory */
   --color-foreground: #2c2a26;
-  /* deep charcoal */
-
   --color-primary: #6c5e53;
-  /* warm brown/stone */
   --color-primary-foreground: #faf9f6;
   --color-secondary: #c7b198;
-  /* soft beige */
   --color-secondary2: #9da7a0;
-  /* sage green-gray */
-
   --color-success: #7ba173;
-  /* gentle green */
   --color-destructive: #c25f5a;
-  /* muted red */
-
   --color-muted: #e0d8cf;
   --color-text-light: #665e54;
-
-
 
   /* Dark Theme */
   --color-background-dark: #0f172a;
   --color-foreground-dark: #f1f5f9;
-
   --color-primary-dark: #818cf8;
   --color-secondary-dark: #a5b4fc;
-
   --color-success-dark: #22c55e;
   --color-destructive-dark: #f87171;
-
   --color-muted-dark: #334155;
   --color-text-light-dark: #94a3b8;
 
@@ -61,13 +46,10 @@ html {
 .dark {
   --color-background: var(--color-background-dark);
   --color-foreground: var(--color-foreground-dark);
-
   --color-primary: var(--color-primary-dark);
   --color-secondary: var(--color-secondary-dark);
-
   --color-success: var(--color-success-dark);
   --color-destructive: var(--color-destructive-dark);
-
   --color-muted: var(--color-muted-dark);
   --color-text-light: var(--color-text-light-dark);
 }
@@ -75,7 +57,7 @@ html {
 /* Base Styles */
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans text-shadow-sm;
+    @apply bg-background text-foreground font-sans;
   }
 
   h1,
@@ -113,17 +95,14 @@ html {
     @apply w-[85vw] max-w-screen-xl mx-auto;
   }
 
-  /* Updated root-layout for content only, no backgrounds */
   .root-layout {
     @apply max-w-7xl mx-auto flex flex-col gap-16 px-8 max-sm:px-4;
   }
 
-  /* Full-width section wrapper */
   .section-wrapper {
     @apply w-full;
   }
 
-  /* Content container for sections */
   .section-content {
     @apply max-w-7xl mx-auto px-8 max-sm:px-4;
   }
@@ -150,15 +129,15 @@ html {
   @apply items-end;
 }
 
-/* Animations */
+/* Ultra-Fast Animations */
 @utility animate-fadeIn {
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.2s ease-out;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(8px);
   }
 
   to {
@@ -167,14 +146,14 @@ html {
   }
 }
 
-@utility animate-slideDown {
-  animation: slideDown 0.35s ease-out;
+@utility animate-slideUp {
+  animation: slideUp 0.25s ease-out;
 }
 
-@keyframes slideDown {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(15px);
   }
 
   to {
@@ -184,7 +163,7 @@ html {
 }
 
 @utility animate-slideDownSoft {
-  animation: slideDownSoft 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: slideDownSoft 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes slideDownSoft {
@@ -197,4 +176,15 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hardware acceleration for animations */
+.group:hover * {
+  transform: translateZ(0);
 }
