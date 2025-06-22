@@ -1,7 +1,4 @@
-import TopicCard from "@/components/topics/topic-card";
 import TopicsList from "@/components/topics/topics-list";
-import Topics from "@/components/topics/topics-list";
-import { topics } from "@/constants/constants";
 import { client } from "@/sanity/client";
 import { ALL_BLOGS_QUERY, ALL_TOPICS_QUERY } from "@/sanity/utils/queries";
 

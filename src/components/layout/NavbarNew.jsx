@@ -15,9 +15,9 @@ const popularSearches = [
 
 // Topics dropdown items
 const topicsDropdown = [
-  { title: "Persuasion", href: "/topics/persuasion" },
-  { title: "Empathy", href: "/topics/empathy" },
-  { title: "Listening", href: "/topics/listening" },
+  { title: "Persuasion", href: "persuasion" },
+  { title: "Empathy", href: "empathy" },
+  { title: "Listening", href: "listening" },
 ];
 
 const ModernNavbar = () => {
@@ -159,7 +159,7 @@ const ModernNavbar = () => {
                                   transition={{ delay: index * 0.05 }}
                                 >
                                   <Link
-                                    href={topic.href}
+                                    href={`/topics/?tags=${encodeURIComponent(topic.href.toLowerCase())}`}
                                     className="block px-4 py-3 text-sm font-medium text-foreground hover:text-primary hover:bg-gradient-to-r hover:from-secondary/20 hover:to-primary/10 rounded-lg transition-all duration-200"
                                   >
                                     {topic.title}
