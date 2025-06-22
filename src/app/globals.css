@@ -129,15 +129,15 @@ html {
   @apply items-end;
 }
 
-/* Ultra-Fast Animations */
+/* Enhanced Ultra-Fast Animations */
 @utility animate-fadeIn {
-  animation: fadeIn 0.2s ease-out;
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
 
   to {
@@ -147,13 +147,13 @@ html {
 }
 
 @utility animate-slideUp {
-  animation: slideUp 0.25s ease-out;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(20px);
   }
 
   to {
@@ -163,18 +163,94 @@ html {
 }
 
 @utility animate-slideDownSoft {
-  animation: slideDownSoft 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideDownSoft 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes slideDownSoft {
   0% {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-12px);
   }
 
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@utility animate-scaleIn {
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility animate-pulse-soft {
+  animation: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseSoft {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@utility animate-bounce-gentle {
+  animation: bounceGentle 2s infinite;
+}
+
+@keyframes bounceGentle {
+
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40%,
+  43% {
+    transform: translateY(-8px);
+  }
+
+  70% {
+    transform: translateY(-4px);
+  }
+
+  90% {
+    transform: translateY(-2px);
   }
 }
 
@@ -185,6 +261,37 @@ html {
 }
 
 /* Hardware acceleration for animations */
-.group:hover * {
+.group:hover *,
+.animate-fadeIn,
+.animate-slideUp,
+.animate-slideDownSoft,
+.animate-scaleIn,
+.animate-float,
+.animate-pulse-soft,
+.animate-bounce-gentle {
   transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Smooth transitions for interactive elements */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-bounce {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Optimized hover states */
+.hover-lift:hover {
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05) translateZ(0);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(108, 94, 83, 0.3);
 }
