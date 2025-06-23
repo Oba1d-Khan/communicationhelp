@@ -18,6 +18,7 @@ import {
   Zap,
   ScrollText,
   DollarSign,
+  GraduationCap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -100,7 +101,7 @@ const Hero = () => {
   const achievements = [
     { label: "Students Transformed", value: "10K+", icon: Users },
     { label: "Success Rate", value: "94%", icon: TrendingUp },
-    { label: "Years Experience", value: "15+", icon: Award },
+    { label: "Years Experience", value: "35+", icon: Award },
   ];
 
   const socialProof = [
@@ -165,7 +166,7 @@ const Hero = () => {
       </motion.div>
 
       {/* Content Container */}
-      <div className="section-content py-16 md:py-20 lg:py-24 lg:mt-10">
+      <div className="section-content py-30 md:py-20 lg:py-24 lg:mt-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -228,7 +229,7 @@ const Hero = () => {
 
               {/* Subtitle */}
               <motion.p
-                className="text-xl  text-text-light max-w-4xl mx-auto leading-relaxed font-medium lg:px-15"
+                className="text-md md:text-lg  text-text-light max-w-4xl mx-auto leading-relaxed font-medium lg:px-15"
                 variants={itemVariants}
               >
                 Master the psychology of persuasion, empathetic listening, and
@@ -267,171 +268,151 @@ const Hero = () => {
           </motion.div>
 
           {/* Enhanced Hero Image Section */}
-          <motion.section
-            ref={ref}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="relative w-full py-8 md:py-12 lg:py-16"
+          <motion.div
+            variants={itemVariants}
+            className="relative max-w-7xl mx-auto "
           >
-            <div className="container">
-              <motion.div
-                variants={itemVariants}
-                className="relative max-w-7xl mx-auto"
-              >
-                {/* Enhanced Background Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/15 to-primary/10 rounded-3xl blur-3xl scale-110 animate-pulse-soft" />
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-3xl" />
+            {/* Background Glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-3xl blur-3xl scale-105 animate-pulse" />
 
-                {/* Main Container */}
-                <div className="relative overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl group bg-gradient-to-br from-gray-900 to-gray-800">
-                  {/* Hero Image */}
-                  <div className="relative aspect-[16/10] md:aspect-[16/9] lg:aspect-[2/1] overflow-hidden">
-                    <Image
-                      src={heroImg || "/placeholder.svg?height=720&width=1280"}
-                      fill
-                      alt="Professor teaching communication skills"
-                      className="object-cover transition-all duration-700 group-hover:scale-105"
-                      priority
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
-                    />
+            {/* Main Image Container */}
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl group ">
+              <Image
+                src={heroImg || "/placeholder.svg?height=720&width=1280"}
+                width={1280}
+                height={720}
+                alt="Professor teaching communication skills"
+                className="w-full h-[700px] md:h-[600px] lg:h-[700px] object-cover transition-transform duration-500 group-hover:scale-105"
+                priority
+              />
 
-                    {/* Gradient Overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-primary/30" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 mix-blend-overlay" />
-                  </div>
+              {/* Enhanced Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 via-transparent to-transparent" />
 
-                  {/* Content Overlay */}
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full px-6 md:px-12 lg:px-16">
-                      <div className="max-w-4xl">
-                        <motion.div
-                          variants={itemVariants}
-                          className="space-y-4 md:space-y-6 lg:space-y-8"
+              {/* Content Overlay */}
+              <div className="absolute inset-0 flex items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.2, duration: 0.6, ease: "easeOut" }}
+                  className="max-w-2xl mx-8 md:mx-16 text-white space-y-6"
+                >
+                  <Badge className="bg-gradient-to-t from-primary/90  to-primary/80 text-white border-0 text-sm px-4 py-2 rounded-2xl">
+                    <GraduationCap size={42} className=" mr-2" />
+                    Communication Expert
+                  </Badge>
+
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight">
+                    Evidence-Based
+                    <span className="block text-secondary2">
+                      Communication Mastery
+                    </span>
+                  </h2>
+
+                  <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl">
+                    Discover the neuroscience and psychology behind persuasive
+                    communication. Transform how you connect, influence, and
+                    inspire others.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Link
+                      href={"https://www.youtube.com/@HowCommunicationWorks"}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <Button
+                          size="lg"
+                          className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-secondary text-white shadow-xl hover:shadow-2xl transition-all duration-300 group relative overflow-hidden"
                         >
-                          {/* Badge */}
                           <motion.div
-                            variants={itemVariants}
-                            className="inline-block"
-                          >
-                            <Badge className="bg-secondary-light text-white border-0 text-sm md:text-base px-4 py-2 md:px-6 md:py-3 rounded-full shadow-lg backdrop-blur-sm text-shadow-sm">
-                              <Mic className="w-4 h-4 md:w-8 md:h-8 mr-2" />
-                              Communication Expert
-                            </Badge>
-                          </motion.div>
+                            className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
+                            initial={{ x: "-100%" }}
+                            whileHover={{ x: "100%" }}
+                            transition={{ duration: 0.6 }}
+                          />
+                          <span className="relative z-10 flex items-center px-2">
+                            <motion.div
+                              whileHover={{ scale: 1.2, rotate: 5 }}
+                              transition={{ type: "spring", stiffness: 300 }}
+                            >
+                              <Play className="w-5 h-5 mr-2 group-hover:text-white transition-colors " />
+                            </motion.div>
+                            Watch Now
+                          </span>
+                        </Button>
+                      </motion.div>
+                    </Link>
 
-                          {/* Main Heading */}
-                          <motion.div variants={itemVariants}>
-                            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold leading-tight text-white">
-                              Evidence-Based
-                              <span className="block text-primary-foreground/90 ">
-                                Communication Mastery
-                              </span>
-                            </h1>
-                          </motion.div>
-
-                          {/* Description */}
-                          <motion.p
-                            variants={itemVariants}
-                            className="text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl"
-                          >
-                            Discover the neuroscience and psychology behind
-                            persuasive communication. Transform how you connect,
-                            influence, and inspire others through evidence-based
-                            techniques.
-                          </motion.p>
-
-                          {/* CTA Buttons */}
+                    <Link href={"/blog"}>
+                      <motion.div
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white hover:border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
+                        >
                           <motion.div
-                            variants={itemVariants}
-                            className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4"
-                          >
-                            <Link href={"/about"}>
-                              <Button
-                                size="lg"
-                                className="bg-secondary hover:bg-primary/90 text-white shadow-xl transition-all duration-300 hover-lift text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full"
-                              >
-                                <Play className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-                                Watch Preview
-                              </Button>
-                            </Link>
-                            <Link href={"/blog"}>
-                              <Button
-                                variant="outline"
-                                size="lg"
-                                className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-lg transition-all duration-300 text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full"
-                              >
-                                <BookOpen className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-                                Explore Content
-                              </Button>
-                            </Link>
-                          </motion.div>
-                        </motion.div>
-                      </div>
-                    </div>
+                            className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"
+                            initial={{ x: "-100%" }}
+                            whileHover={{ x: "100%" }}
+                            transition={{ duration: 0.6 }}
+                          />
+                          <span className="relative z-10 flex items-center">
+                            <motion.div
+                              whileHover={{ scale: 1.2, rotate: -5 }}
+                              transition={{ type: "spring", stiffness: 300 }}
+                            >
+                              <BookOpen className="w-5 h-5 mr-2 group-hover:text-white transition-colors" />
+                            </motion.div>
+                            Explore Content
+                          </span>
+                        </Button>
+                      </motion.div>
+                    </Link>
                   </div>
+                </motion.div>
+              </div>
 
-                  {/* Floating Achievement Cards - Responsive positioning */}
-                  <motion.div
-                    variants={floatingVariants}
-                    className="absolute bottom-4 right-4 md:bottom-6 md:right-6 lg:bottom-8 lg:right-8"
-                  >
-                    <div className="bg-white/95 backdrop-blur-md rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-6 shadow-2xl border border-white/20 hover-lift">
-                      <div className="grid grid-cols-3 gap-3 md:gap-4 lg:gap-6 text-center">
-                        {achievements.map((stat, index) => (
-                          <motion.div
-                            key={index}
-                            className="space-y-1 md:space-y-2"
-                            whileHover={{
-                              scale: 1.05,
-                              transition: { duration: 0.2 },
-                            }}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{
-                              opacity: 1,
-                              y: 0,
-                              transition: {
-                                delay: 1 + index * 0.1,
-                                duration: 0.3,
-                              },
-                            }}
-                          >
-                            <div className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-primary/10 rounded-lg md:rounded-xl flex items-center justify-center mx-auto">
-                              <stat.icon className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 text-primary" />
-                            </div>
-                            <div className="text-sm md:text-lg lg:text-2xl font-bold text-foreground">
-                              {stat.value}
-                            </div>
-                            <div className="text-xs md:text-sm text-text-light font-medium leading-tight">
-                              {stat.label}
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Decorative Elements */}
-                  <div className="absolute top-4 left-4 md:top-6 md:left-6 lg:top-8 lg:left-8">
-                    <div className="w-2 h-2 md:w-3 md:h-3 bg-primary rounded-full animate-pulse-soft" />
-                  </div>
-                  <div className="absolute top-8 left-8 md:top-12 md:left-12 lg:top-16 lg:left-16">
-                    <div
-                      className="w-1 h-1 md:w-2 md:h-2 bg-secondary rounded-full animate-pulse-soft"
-                      style={{ animationDelay: "1s" }}
-                    />
+              {/* Floating Achievement Cards */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5, duration: 0.6 }}
+                className="absolute bottom-8 right-8 hidden lg:block"
+              >
+                <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border border-white/20">
+                  <div className="grid grid-cols-3 gap-6 text-center">
+                    {achievements.map((stat, index) => (
+                      <motion.div
+                        key={index}
+                        className="space-y-2"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mx-auto">
+                          <stat.icon className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="text-2xl font-bold text-foreground">
+                          {stat.value}
+                        </div>
+                        <div className="text-xs text-text-light font-medium leading-tight">
+                          {stat.label}
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
-
-                {/* Bottom Accent Line */}
-                <motion.div
-                  variants={itemVariants}
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 md:w-24 h-1 bg-gradient-primary rounded-full"
-                />
               </motion.div>
             </div>
-          </motion.section>
+          </motion.div>
 
           {/* Value Proposition */}
           <motion.div
@@ -452,7 +433,7 @@ const Hero = () => {
               </span>
             </h2>
 
-            <p className="text-xl md:text-2xl text-text-light leading-relaxed max-w-4xl mx-auto">
+            <p className="text-lg text-text-light leading-relaxed max-w-4xl mx-auto mb-4">
               Learn evidence-based strategies from neuroscience and behavioral
               psychology. Become a more effective communicator who builds trust,
               influences with integrity, and creates lasting positive impact.
@@ -497,7 +478,7 @@ const Hero = () => {
                     <h3 className="text-2xl lg:text-3xl font-heading font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p className="text-text-light leading-relaxed text-lg">
+                    <p className="text-text-light leading-relaxed text-md xl:text-lg mt-2">
                       {item.desc}
                     </p>
                   </div>
