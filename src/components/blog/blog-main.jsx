@@ -99,7 +99,7 @@ export default function BlogMain({ blogs, topics }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Hero Slider Section */}
-      <section className="section-wrapper">
+      <section className="section-wrapper mt-16">
         <BlogSlider featuredBlogs={featured} />
       </section>
 

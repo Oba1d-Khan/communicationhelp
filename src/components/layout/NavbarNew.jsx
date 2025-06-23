@@ -85,7 +85,7 @@ const ModernNavbar = () => {
 
   // Optimized scroll handler with throttling
   const handleScroll = useCallback(() => {
-    const scrolled = window.scrollY > 50;
+    const scrolled = window.scrollY > 20;
     if (scrolled !== isScrolled) {
       setIsScrolled(scrolled);
     }
@@ -328,15 +328,7 @@ const ModernNavbar = () => {
               exit="exit"
               className="absolute right-0 top-0 h-full w-full max-w-sm bg-background/98 backdrop-blur-md shadow-2xl border-l border-primary/20"
             >
-              <div className="flex items-center justify-between p-6 border-b border-primary/20 h-16">
-                <div className="text-xl font-bold text-foreground">Menu</div>
-                <button
-                  onClick={closeMobileMenu}
-                  className="p-2 rounded-xl text-foreground hover:bg-secondary/30 transition-colors duration-150"
-                >
-                  <X size={20} />
-                </button>
-              </div>
+              <div className="flex items-center justify-between p-6 border-b border-primary/20 h-16"></div>
 
               {/* Mobile Search */}
               <div className="p-6 border-b border-primary/20">
@@ -415,7 +407,7 @@ const ModernNavbar = () => {
                                 {topicsDropdown.map((topic) => (
                                   <Link
                                     key={topic.title}
-                                    href={topic.href}
+                                    href={`/topics/?tags=${encodeURIComponent(topic.href.toLowerCase())}`}
                                     onClick={closeMobileMenu}
                                     className="block p-3 text-sm text-text-light hover:text-foreground hover:bg-secondary/20 rounded-lg transition-all duration-150"
                                   >

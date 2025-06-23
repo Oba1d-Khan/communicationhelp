@@ -140,7 +140,7 @@ const TopicsList = ({ blogs, topics }) => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background mt-20 ">
       <div className="container py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
@@ -150,14 +150,14 @@ const TopicsList = ({ blogs, topics }) => {
                 Topics
               </h1>
 
-              <div className="space-y-3">
+              <div className="space-y-3 bg-gradient-to-tr from-slate-100 to-slate-100/40  backdrop-blur-md pt-4 rounded-2xl">
                 <Button
                   variant={activeTopic === "all" ? "default" : "ghost"}
                   className="w-full justify-start text-left h-auto p-4 rounded-xl"
                   onClick={() => handleTopicClick("all", "")}
                 >
                   <div className="flex items-center w-full">
-                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-primary to-secondary mr-3" />
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-primary to-secondary mr-3 invert" />
                     <div className="flex-1">
                       <div className="font-medium">All Topics</div>
                       <div className="text-xs text-muted-foreground">
@@ -168,22 +168,26 @@ const TopicsList = ({ blogs, topics }) => {
                 </Button>
 
                 {topics.map((topic) => (
-                  <Button
-                    key={topic._id}
-                    variant={activeTopic === topic._id ? "default" : "ghost"}
-                    className="w-full justify-start text-left h-auto p-4 rounded-xl cursor-pointer"
-                    onClick={() => handleTopicClick(topic._id, topic.title)}
-                  >
-                    <div className="flex items-center w-full">
-                      <div className="w-3 h-3 rounded-full bg-gradient-to-r from-secondary to-primary mr-3" />
-                      <div className="flex-1">
-                        <div className="font-medium">{topic.title}</div>
+                  <>
+                    <Button
+                      key={topic._id}
+                      variant={activeTopic === topic._id ? "default" : "ghost"}
+                      className="w-full justify-start text-left h-auto p-4 rounded-xl cursor-pointer"
+                      onClick={() => handleTopicClick(topic._id, topic.title)}
+                    >
+                      <div className="flex items-center w-full">
+                        <div
+                          className={`w-3 h-3 rounded-full bg-gradient-to-tr from-primary/70 to-secondary mr-3 ${activeTopic === topic._id ? "invert" : ""} `}
+                        />
+                        <div className="flex-1">
+                          <div className="font-medium">{topic.title}</div>
+                        </div>
+                        {activeTopic === topic._id && (
+                          <ChevronRight className="w-4 h-4" />
+                        )}
                       </div>
-                      {activeTopic === topic._id && (
-                        <ChevronRight className="w-4 h-4" />
-                      )}
-                    </div>
-                  </Button>
+                    </Button>
+                  </>
                 ))}
               </div>
             </div>
@@ -192,7 +196,7 @@ const TopicsList = ({ blogs, topics }) => {
           {/* Main Content */}
           <div className="lg:col-span-3">
             {/* Header */}
-            <div className="mb-8">
+            <div className="mt-2 flex flex-col-reverse">
               <AnimatePresence mode="wait">
                 {activeTopicData && (
                   <motion.div
@@ -203,7 +207,7 @@ const TopicsList = ({ blogs, topics }) => {
                     transition={{ duration: 0.2 }}
                     className="mb-6"
                   >
-                    <h2 className="text-2xl md:text-3xl font-heading text-foreground mb-2">
+                    <h2 className="text-3xl md:text-4xl font-heading text-secondary text-shadow-sm mb-2 ">
                       {activeTopicData.name || activeTopicData.title}
                     </h2>
                     <p className="text-text-light">
@@ -214,7 +218,7 @@ const TopicsList = ({ blogs, topics }) => {
               </AnimatePresence>
 
               {/* Search and Controls */}
-              <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-center justify-between">
+              <div className="flex flex-col sm:flex-row gap-4 px-3 sm:px-0 sm:items-center justify-between mb-10 sm:mb-10">
                 <div className="relative flex-1 max-w-md">
                   <Search
                     strokeWidth={2}
@@ -223,13 +227,13 @@ const TopicsList = ({ blogs, topics }) => {
                   <input
                     type="text"
                     placeholder="Search blogs..."
-                    className="w-full pl-10 pr-4 py-2 border border-primary/20 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm transition-all duration-200"
+                    className="w-full pl-10 pr-4 py-2 border border-primary/40 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm transition-all duration-200"
                     value={searchQuery}
                     onChange={handleSearchChange}
                   />
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex justify-center sm:justify-start items-center gap-2">
                   <Select value={sortBy} onValueChange={setSortBy}>
                     <SelectTrigger className="w-[160px] border-primary/50 rounded-full bg-primary/5 hover:border-primary/70 focus:ring-2 focus:ring-primary/30 transition-all duration-200 cursor-pointer">
                       <SelectValue placeholder="Sort by" />
@@ -277,7 +281,7 @@ const TopicsList = ({ blogs, topics }) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-6"
+                className="space-y-6 "
               >
                 {filteredBlogs.length === 0 ? (
                   <motion.div
