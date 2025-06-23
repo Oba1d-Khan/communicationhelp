@@ -26,6 +26,7 @@ html {
   --color-primary-foreground: #fffdf8;
 
   --color-secondary: #5E5768;
+  --color-secondary-light: #9E9AA4;
   /* Lighter, soft gold accent */
   --color-secondary2: #7f9f93;
   /* Muted teal for balance */
@@ -41,8 +42,8 @@ html {
   /* Softer for subtext without vanishing */
 
   /* Optional gradients */
-  --gradient-primary: linear-gradient(135deg, #c9a47e, #845f3f);
-  --gradient-secondary: linear-gradient(135deg, #7f9f93, #d4af7f);
+  --gradient: linear-gradient(135deg, #5E5768, #4F6D7A);
+  --gradient-secondary: linear-gradient(135deg, #B57F50, #d4af7f);
 
   /* Dark Theme */
   --color-background-dark: #0f172a;

@@ -1,7 +1,7 @@
 "use client";
 import heroImg from "../../../public/images/hero-home.jpg";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import {
   Users,
   MessageCircle,
@@ -22,8 +22,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Marquee } from "../magicui/marquee";
+import { useRef } from "react";
+import Link from "next/link";
 
 const Hero = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 800], [0, 50]);
   const opacity = useTransform(scrollY, [0, 600], [1, 0.8]);
@@ -114,6 +118,20 @@ const Hero = () => {
       icon: DollarSign,
     },
   ];
+
+  const floatingVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        delay: 0.8,
+        ease: [0.34, 1.56, 0.64, 1],
+      },
+    },
+  };
 
   return (
     <section className="section-wrapper relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
@@ -249,107 +267,171 @@ const Hero = () => {
           </motion.div>
 
           {/* Enhanced Hero Image Section */}
-          <motion.div
-            variants={itemVariants}
-            className="relative max-w-7xl mx-auto "
+          <motion.section
+            ref={ref}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="relative w-full py-8 md:py-12 lg:py-16"
           >
-            {/* Background Glow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-3xl blur-3xl scale-105 animate-pulse" />
-
-            {/* Main Image Container */}
-            <div className="relative overflow-hidden rounded-3xl shadow-2xl group ">
-              <Image
-                src={heroImg || "/placeholder.svg?height=720&width=1280"}
-                width={1280}
-                height={720}
-                alt="Professor teaching communication skills"
-                className="w-full h-[700px] md:h-[600px] lg:h-[700px] object-cover transition-transform duration-500 group-hover:scale-105"
-                priority
-              />
-
-              {/* Enhanced Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-              {/* Content Overlay */}
-              <div className="absolute inset-0 flex items-center">
-                <motion.div
-                  initial={{ opacity: 0, x: -40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 1.2, duration: 0.6, ease: "easeOut" }}
-                  className="max-w-2xl mx-8 md:mx-16 text-white space-y-6"
-                >
-                  <Badge className="bg-primary/90 text-white border-0 text-sm px-4 py-2">
-                    <Mic className="w-4 h-4 mr-2" />
-                    Communication Expert
-                  </Badge>
-
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight">
-                    Evidence-Based
-                    <span className="block text-secondary">
-                      Communication Mastery
-                    </span>
-                  </h2>
-
-                  <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl">
-                    Discover the neuroscience and psychology behind persuasive
-                    communication. Transform how you connect, influence, and
-                    inspire others.
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button
-                      size="lg"
-                      className="bg-primary hover:bg-primary/90 text-white shadow-xl transition-all duration-300"
-                    >
-                      <Play className="w-5 h-5 mr-2" />
-                      Watch Preview
-                    </Button>
-
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-lg"
-                    >
-                      <BookOpen className="w-5 h-5 mr-2" />
-                      Explore Content
-                    </Button>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Floating Achievement Cards */}
+            <div className="container">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5, duration: 0.6 }}
-                className="absolute bottom-8 right-8 hidden lg:block"
+                variants={itemVariants}
+                className="relative max-w-7xl mx-auto"
               >
-                <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border border-white/20">
-                  <div className="grid grid-cols-3 gap-6 text-center">
-                    {achievements.map((stat, index) => (
-                      <motion.div
-                        key={index}
-                        className="space-y-2"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mx-auto">
-                          <stat.icon className="w-5 h-5 text-primary" />
-                        </div>
-                        <div className="text-2xl font-bold text-foreground">
-                          {stat.value}
-                        </div>
-                        <div className="text-xs text-text-light font-medium leading-tight">
-                          {stat.label}
-                        </div>
-                      </motion.div>
-                    ))}
+                {/* Enhanced Background Glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/15 to-primary/10 rounded-3xl blur-3xl scale-110 animate-pulse-soft" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-3xl" />
+
+                {/* Main Container */}
+                <div className="relative overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl group bg-gradient-to-br from-gray-900 to-gray-800">
+                  {/* Hero Image */}
+                  <div className="relative aspect-[16/10] md:aspect-[16/9] lg:aspect-[2/1] overflow-hidden">
+                    <Image
+                      src={heroImg || "/placeholder.svg?height=720&width=1280"}
+                      fill
+                      alt="Professor teaching communication skills"
+                      className="object-cover transition-all duration-700 group-hover:scale-105"
+                      priority
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+                    />
+
+                    {/* Gradient Overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-primary/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 mix-blend-overlay" />
+                  </div>
+
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full px-6 md:px-12 lg:px-16">
+                      <div className="max-w-4xl">
+                        <motion.div
+                          variants={itemVariants}
+                          className="space-y-4 md:space-y-6 lg:space-y-8"
+                        >
+                          {/* Badge */}
+                          <motion.div
+                            variants={itemVariants}
+                            className="inline-block"
+                          >
+                            <Badge className="bg-secondary-light text-white border-0 text-sm md:text-base px-4 py-2 md:px-6 md:py-3 rounded-full shadow-lg backdrop-blur-sm text-shadow-sm">
+                              <Mic className="w-4 h-4 md:w-8 md:h-8 mr-2" />
+                              Communication Expert
+                            </Badge>
+                          </motion.div>
+
+                          {/* Main Heading */}
+                          <motion.div variants={itemVariants}>
+                            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold leading-tight text-white">
+                              Evidence-Based
+                              <span className="block text-primary-foreground/90 ">
+                                Communication Mastery
+                              </span>
+                            </h1>
+                          </motion.div>
+
+                          {/* Description */}
+                          <motion.p
+                            variants={itemVariants}
+                            className="text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl"
+                          >
+                            Discover the neuroscience and psychology behind
+                            persuasive communication. Transform how you connect,
+                            influence, and inspire others through evidence-based
+                            techniques.
+                          </motion.p>
+
+                          {/* CTA Buttons */}
+                          <motion.div
+                            variants={itemVariants}
+                            className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4"
+                          >
+                            <Link href={"/about"}>
+                              <Button
+                                size="lg"
+                                className="bg-secondary hover:bg-primary/90 text-white shadow-xl transition-all duration-300 hover-lift text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full"
+                              >
+                                <Play className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                                Watch Preview
+                              </Button>
+                            </Link>
+                            <Link href={"/blog"}>
+                              <Button
+                                variant="outline"
+                                size="lg"
+                                className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-lg transition-all duration-300 text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full"
+                              >
+                                <BookOpen className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                                Explore Content
+                              </Button>
+                            </Link>
+                          </motion.div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Achievement Cards - Responsive positioning */}
+                  <motion.div
+                    variants={floatingVariants}
+                    className="absolute bottom-4 right-4 md:bottom-6 md:right-6 lg:bottom-8 lg:right-8"
+                  >
+                    <div className="bg-white/95 backdrop-blur-md rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-6 shadow-2xl border border-white/20 hover-lift">
+                      <div className="grid grid-cols-3 gap-3 md:gap-4 lg:gap-6 text-center">
+                        {achievements.map((stat, index) => (
+                          <motion.div
+                            key={index}
+                            className="space-y-1 md:space-y-2"
+                            whileHover={{
+                              scale: 1.05,
+                              transition: { duration: 0.2 },
+                            }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{
+                              opacity: 1,
+                              y: 0,
+                              transition: {
+                                delay: 1 + index * 0.1,
+                                duration: 0.3,
+                              },
+                            }}
+                          >
+                            <div className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-primary/10 rounded-lg md:rounded-xl flex items-center justify-center mx-auto">
+                              <stat.icon className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5 text-primary" />
+                            </div>
+                            <div className="text-sm md:text-lg lg:text-2xl font-bold text-foreground">
+                              {stat.value}
+                            </div>
+                            <div className="text-xs md:text-sm text-text-light font-medium leading-tight">
+                              {stat.label}
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Decorative Elements */}
+                  <div className="absolute top-4 left-4 md:top-6 md:left-6 lg:top-8 lg:left-8">
+                    <div className="w-2 h-2 md:w-3 md:h-3 bg-primary rounded-full animate-pulse-soft" />
+                  </div>
+                  <div className="absolute top-8 left-8 md:top-12 md:left-12 lg:top-16 lg:left-16">
+                    <div
+                      className="w-1 h-1 md:w-2 md:h-2 bg-secondary rounded-full animate-pulse-soft"
+                      style={{ animationDelay: "1s" }}
+                    />
                   </div>
                 </div>
+
+                {/* Bottom Accent Line */}
+                <motion.div
+                  variants={itemVariants}
+                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 md:w-24 h-1 bg-gradient-primary rounded-full"
+                />
               </motion.div>
             </div>
-          </motion.div>
+          </motion.section>
 
           {/* Value Proposition */}
           <motion.div
