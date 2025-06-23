@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
 @plugin "tailwindcss-animate";
 
 html {
@@ -14,16 +16,33 @@ html {
   --font-heading: var(--font-dm-serif-display);
 
   /* Light Theme (Default) */
-  --color-background: #faf9f6;
-  --color-foreground: #2c2a26;
-  --color-primary: #6c5e53;
-  --color-primary-foreground: #faf9f6;
-  --color-secondary: #c7b198;
-  --color-secondary2: #9da7a0;
-  --color-success: #7ba173;
-  --color-destructive: #c25f5a;
-  --color-muted: #e0d8cf;
-  --color-text-light: #665e54;
+  --color-background: #fdfcf9;
+  /* Light creamy background for better contrast */
+  --color-foreground: #1e1b16;
+  /* Deeper dark for richer text contrast */
+
+  --color-primary: #4F6D7A;
+  /* --color-primary: #B57F50; */
+  --color-primary-foreground: #fffdf8;
+
+  --color-secondary: #5E5768;
+  /* Lighter, soft gold accent */
+  --color-secondary2: #7f9f93;
+  /* Muted teal for balance */
+
+  --color-success: #70a47e;
+  /* Sage green (calming, friendly) */
+  --color-destructive: #d76a63;
+  /* Soft coral red (alert, not harsh) */
+
+  --color-muted: #e9e5df;
+  /* Muted beige for dividers/backgrounds */
+  --color-text-light: #6f6458;
+  /* Softer for subtext without vanishing */
+
+  /* Optional gradients */
+  --gradient-primary: linear-gradient(135deg, #c9a47e, #845f3f);
+  --gradient-secondary: linear-gradient(135deg, #7f9f93, #d4af7f);
 
   /* Dark Theme */
   --color-background-dark: #0f172a;
@@ -294,4 +313,29 @@ html {
 
 .hover-glow:hover {
   box-shadow: 0 0 20px rgba(108, 94, 83, 0.3);
+}
+
+@theme inline {
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }

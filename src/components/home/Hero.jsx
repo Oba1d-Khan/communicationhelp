@@ -16,9 +16,12 @@ import {
   Brain,
   Heart,
   Zap,
+  ScrollText,
+  DollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Marquee } from "../magicui/marquee";
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -97,9 +100,19 @@ const Hero = () => {
   ];
 
   const socialProof = [
-    { platform: "YouTube", metric: "500K+ Views", icon: Video },
+    { platform: "YouTube", metric: "2.5M+ Views", icon: Video },
     { platform: "TikTok", metric: "2M+ Engagements", icon: Mic },
     { platform: "Speaking", metric: "200+ Events", icon: MessageCircle },
+    {
+      platform: "Scientific Publications",
+      metric: " 100+ Papers",
+      icon: ScrollText,
+    },
+    {
+      platform: "Research Funding",
+      metric: "$17M+",
+      icon: DollarSign,
+    },
   ];
 
   return (
@@ -134,7 +147,7 @@ const Hero = () => {
       </motion.div>
 
       {/* Content Container */}
-      <div className="section-content py-16 md:py-20 lg:py-24">
+      <div className="section-content py-16 md:py-20 lg:py-24 lg:mt-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -149,12 +162,12 @@ const Hero = () => {
             <motion.div variants={itemVariants} className="space-y-6">
               {/* Social Proof Badge */}
               <motion.div
-                className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-lg"
+                className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3  shadow-lg"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
+                  {[...Array(5).slice(4)].map((_, i) => (
                     <Star
                       key={i}
                       className="w-4 h-4 fill-amber-400 text-amber-400"
@@ -162,13 +175,15 @@ const Hero = () => {
                   ))}
                 </div>
                 <span className="text-sm font-semibold text-foreground">
-                  Trusted by 10,000+ professionals
+                  {/* Backed by 35+ Years of Communication Research */}
+                  {/* Taught 1000s Nationwide */}
+                  35+ Years of Communication Research
                 </span>
               </motion.div>
 
               {/* Main Headline */}
               <motion.h1
-                className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-[0.9] max-w-6xl mx-auto text-foreground"
+                className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-[0.9] max-w-6xl mx-auto text-foreground "
                 variants={itemVariants}
               >
                 Transform Through{" "}
@@ -207,26 +222,29 @@ const Hero = () => {
             {/* Social Proof Metrics */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap justify-center gap-6 md:gap-8"
+              // className="flex flex-wrap justify-center gap-6 md:gap-8 "
+              className="relative flex w-full flex-col items-center justify-center  gap-6 md:gap-8 overflow-hidden"
             >
-              {socialProof.map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-primary/10"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <item.icon className="w-5 h-5 text-primary" />
-                  <div className="text-left">
-                    <div className="font-bold text-foreground">
-                      {item.metric}
+              <Marquee pauseOnHover className="[--duration:30s]">
+                {socialProof.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-primary/10"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <item.icon className="w-5 h-5 text-primary" />
+                    <div className="text-left">
+                      <div className="font-bold text-foreground">
+                        {item.metric}
+                      </div>
+                      <div className="text-sm text-text-light">
+                        {item.platform}
+                      </div>
                     </div>
-                    <div className="text-sm text-text-light">
-                      {item.platform}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </Marquee>
             </motion.div>
           </motion.div>
 
