@@ -284,6 +284,11 @@ const Hero = () => {
                 alt="Professor teaching communication skills"
                 className="w-full h-[700px] md:h-[600px] lg:h-[700px] object-cover transition-transform duration-500 group-hover:scale-105"
                 priority
+                placeholder="blur"
+                sizes="(max-width: 640px) 100vw,
+         (max-width: 1024px) 90vw,
+         (max-width: 1280px) 95vw,
+         1280px"
               />
 
               {/* Enhanced Overlays */}
