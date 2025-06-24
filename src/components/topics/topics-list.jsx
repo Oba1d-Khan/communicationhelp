@@ -207,7 +207,7 @@ const TopicsList = ({ blogs, topics }) => {
                     transition={{ duration: 0.2 }}
                     className="mb-6"
                   >
-                    <h2 className="text-3xl md:text-4xl font-heading text-secondary text-shadow-sm mb-2 ">
+                    <h2 className="text-3xl md:text-4xl font-heading gradient-theme text-shadow-sm mb-2 ">
                       {activeTopicData.name || activeTopicData.title}
                     </h2>
                     <p className="text-text-light">

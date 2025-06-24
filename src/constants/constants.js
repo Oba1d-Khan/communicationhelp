@@ -1,5 +1,5 @@
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Heart, Ear, MessageCircle } from "lucide-react";
+import { FaTiktok, FaXTwitter, FaYoutube } from "react-icons/fa6";
 
 export const navLinks = {
   left: [
@@ -38,18 +38,18 @@ export const footerLinks = [
 export const socials = [
   {
     name: "Twitter",
-    href: "https://twitter.com/ansub",
-    icon: FaTwitter,
+    href: "http://x.com/",
+    icon: FaXTwitter,
   },
   {
-    name: "GitHub",
-    href: "https://github.com/ansub",
-    icon: FaGithub,
+    name: "Youtube",
+    href: "https://youtube.com",
+    icon: FaYoutube,
   },
   {
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/ansub",
-    icon: FaLinkedin,
+    name: "TikTok",
+    href: "https://tiktok.com",
+    icon: FaTiktok,
   },
 ];
 

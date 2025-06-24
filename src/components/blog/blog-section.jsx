@@ -31,7 +31,7 @@ const BlogSection = async () => {
                 variant="outline"
                 className="group border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 rounded-full px-6 py-3"
               >
-                View All Posts
+                View All Blogs
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
               </Button>
             </Link>

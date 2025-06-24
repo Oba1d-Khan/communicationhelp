@@ -118,7 +118,7 @@ const BlogListItem = ({ blog, index = 0 }) => {
           <div className="mt-8 pt-6 border-t border-gray-100 group-hover:border-primary/20 transition-colors duration-300">
             <div className="flex items-center justify-between">
               <div className="flex items-center text-primary font-semibold text-lg">
-                <span>Read Article</span>
+                <span>Read Now</span>
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2 duration-300" />
               </div>
 

@@ -207,7 +207,7 @@ const Hero = () => {
               >
                 Transform Through{" "}
                 <motion.span
-                  className="relative inline-block text-primary"
+                  className="relative inline-block gradient-theme"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -311,7 +311,7 @@ const Hero = () => {
 
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight">
                     Evidence-Based
-                    <span className="block text-secondary2">
+                    <span className="block text-slate-300">
                       Communication Mastery
                     </span>
                   </h2>
@@ -464,29 +464,35 @@ const Hero = () => {
                 />
 
                 <div
-                  className={`relative bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-xl border ${item.borderColor} group-hover:shadow-2xl transition-all duration-300 h-full`}
+                  className={`relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-xl border ${item.borderColor} group-hover:shadow-2xl transition-all duration-300 h-full overflow-hidden`}
                 >
-                  {/* Icon */}
-                  <motion.div
-                    className="relative mb-6"
-                    whileHover={{ rotate: [0, -5, 5, 0], scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-lg flex items-center justify-center ${item.iconColor} transition-all duration-300`}
-                    >
-                      <item.icon className="w-8 h-8" />
-                    </div>
-                  </motion.div>
+                  {/* Dotted Background Overlay */}
+                  <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:16px_16px] opacity-70 pointer-events-none z-0" />
 
-                  {/* Content */}
-                  <div className="space-y-4">
-                    <h3 className="text-2xl lg:text-3xl font-heading font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="text-text-light leading-relaxed text-md xl:text-lg mt-2">
-                      {item.desc}
-                    </p>
+                  {/* Foreground Content */}
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <motion.div
+                      className="relative mb-6"
+                      whileHover={{ rotate: [0, -5, 5, 0], scale: 1.05 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <div
+                        className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-lg flex items-center justify-center ${item.iconColor} transition-all duration-300`}
+                      >
+                        <item.icon className="w-8 h-8" />
+                      </div>
+                    </motion.div>
+
+                    {/* Content */}
+                    <div className="space-y-4">
+                      <h3 className="text-2xl lg:text-3xl font-heading font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                      <p className="text-text-light leading-relaxed text-md xl:text-lg mt-2">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>

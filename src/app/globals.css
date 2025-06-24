@@ -127,7 +127,7 @@ html {
   }
 
   .gradient-theme {
-    @apply bg-clip-text text-transparent inline-block bg-gradient-to-r from-primary-darker to-secondary hover:from-primary/90 hover:to-secondary/90;
+    @apply bg-clip-text text-transparent inline-block bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90;
 
   }
 }

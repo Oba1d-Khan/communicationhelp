@@ -11,7 +11,7 @@ const Footer = () => {
             <Link
               key={item.title}
               href={item.href}
-              className="text-sm text-primary hover:text-gray-900 "
+              className="text-sm text-primary-darker hover:text-gray-900 "
             >
               {item.name}
             </Link>
@@ -22,7 +22,7 @@ const Footer = () => {
             <a
               key={item.name}
               href={item.href}
-              className="text-primary hover:primary "
+              className="text-primary-darker hover:primary-darker "
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -33,7 +33,7 @@ const Footer = () => {
             </a>
           ))}
         </div>
-        <p className="mt-6 text-center text-sm text-secondary ">
+        <p className="mt-6 text-center text-sm text-primary-darker ">
           &copy; {new Date().getFullYear()} ObaidDev. All rights reserved.
         </p>
       </div>
