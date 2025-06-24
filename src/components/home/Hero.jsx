@@ -289,6 +289,7 @@ const Hero = () => {
          (max-width: 1024px) 90vw,
          (max-width: 1280px) 95vw,
          1280px"
+                quality={85}
               />
 
               {/* Enhanced Overlays */}
