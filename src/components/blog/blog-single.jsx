@@ -199,9 +199,10 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
       },
     },
   };
+  console.log("blog", blog);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 relative">
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-primary/5 relative">
       {/* Reading Mode Overlay */}
       <AnimatePresence>
         {readingMode && (
@@ -257,19 +258,19 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{
-              opacity: readingMode ? 0.3 : 1,
+              opacity: readingMode ? 0.5 : 1,
               x: 0,
               scale: readingMode ? 0.9 : 1,
             }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-6 right-4 md:bottom-8 md:right-8 z-100 flex flex-col gap-3"
+            className="fixed bottom-6 right-4 md:bottom-8 md:right-8 z-100 flex flex-col gap-3  "
           >
             {/* Share Button */}
             <motion.button
               whileHover={{ scale: readingMode ? 1.02 : 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-primary/20 text-foreground hover:bg-primary/10 shadow-lg transition-all duration-150 group"
+              className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-primary/20 text-foreground hover:bg-primary/10 shadow-lg transition-all duration-150 group cursor-pointer"
               title="Share article"
             >
               <Share2 className="w-5 h-5 mx-auto group-hover:scale-110 transition-transform duration-150" />
@@ -280,7 +281,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
               whileHover={{ scale: readingMode ? 1.02 : 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-primary/20 text-foreground hover:bg-primary/10 shadow-lg transition-all duration-150 group"
+              className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-primary/20 text-foreground hover:bg-primary/10  shadow-lg transition-all duration-150 group cursor-pointer"
               title="Scroll to top"
             >
               <ArrowLeft className="w-5 h-5 mx-auto rotate-90 group-hover:-translate-y-0.5 transition-transform duration-150" />
@@ -302,7 +303,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
           <div className="absolute bottom-10 right-4 md:bottom-20 md:right-20 w-20 h-20 md:w-28 md:h-28 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="section-content">
+        <div className="section-content mt-10 lg:mt-16">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -332,9 +333,10 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
                   src={
                     urlForImage(blog.coverImage?.asset?._ref).url() ||
                     "/images/blog-img.jpg" ||
-                    "/placeholder.svg" ||
                     "/placeholder.svg"
                   }
+                  placeholder={blog.blurDataURL ? "blur" : "empty"}
+                  blurDataURL={blog.blurDataURL}
                   alt={blog.title}
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   fill
@@ -376,7 +378,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
                   </div>
 
                   {/* Mobile-Responsive Title */}
-                  <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-heading text-foreground leading-tight sm:leading-tight md:leading-tight">
+                  <h1 className="gradient-theme text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-heading  leading-tight sm:leading-tight md:leading-tight">
                     {blog.title}
                   </h1>
 
@@ -404,7 +406,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
       {/* Blog Content - Reading Mode Focus Area */}
       <section
         ref={contentRef}
-        className={`py-8 md:py-16 relative z-20 transition-all duration-700 ${readingMode ? "relative z-30" : ""}`}
+        className={`py-8 md:pb-16  relative z-20 transition-all duration-700 ${readingMode ? "relative z-30" : ""}`}
       >
         <div className="section-content">
           <motion.div

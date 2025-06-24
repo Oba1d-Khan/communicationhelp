@@ -22,6 +22,7 @@ html {
   /* Deeper dark for richer text contrast */
 
   --color-primary: #4F6D7A;
+  --color-primary-darker: #465e69;
   /* --color-primary: #B57F50; */
   --color-primary-foreground: #fffdf8;
 
@@ -41,9 +42,7 @@ html {
   --color-text-light: #6f6458;
   /* Softer for subtext without vanishing */
 
-  /* Optional gradients */
-  --gradient: linear-gradient(135deg, #5E5768, #4F6D7A);
-  --gradient-secondary: linear-gradient(135deg, #B57F50, #d4af7f);
+
 
   /* Dark Theme */
   --color-background-dark: #0f172a;
@@ -125,6 +124,11 @@ html {
 
   .section-content {
     @apply max-w-7xl mx-auto px-8 max-sm:px-4;
+  }
+
+  .gradient-theme {
+    @apply bg-clip-text text-transparent inline-block bg-gradient-to-r from-primary-darker to-secondary hover:from-primary/90 hover:to-secondary/90;
+
   }
 }
 

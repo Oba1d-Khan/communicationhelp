@@ -128,6 +128,8 @@ const BlogSlider = ({ featuredBlogs }) => {
                         urlForImage(blog.coverImage.asset._ref).url() ||
                         "/placeholder.svg?height=800&width=1200"
                       }
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjOWQ4ZGI0Ii8+PC9zdmc+"
                       alt={blog.title}
                       fill
                       className="object-cover"

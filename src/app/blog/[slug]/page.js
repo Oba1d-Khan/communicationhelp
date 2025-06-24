@@ -5,6 +5,8 @@ import {
   BLOG_BY_SLUG_QUERY,
   RELATED_BLOGS_QUERY,
 } from "@/sanity/utils/queries";
+import { urlForImage } from "@/sanity/utils/urlFor";
+import { getBlurPlaceholder } from "@/utils/blur-placeholder";
 import React from "react";
 
 export const metadata = {
@@ -23,10 +25,22 @@ const BlogSinglePage = async ({ params }) => {
     options
   );
   const blogsMeta = await client.fetch(ALL_BLOGS_META_QUERY, options);
+
+  const imageUrl = urlForImage(blog.coverImage.asset._ref).url();
+  const blurDataURL = await getBlurPlaceholder(imageUrl);
+  console.log("blurDataURL", blurDataURL);
+
+  const blogWithBlur = {
+    ...blog,
+    coverImage: {
+      ...blog.coverImage,
+      blurDataURL,
+    },
+  };
   return (
     <main className="">
       <BlogSingle
-        blog={blog}
+        blog={blogWithBlur}
         relatedBlogs={relatedBlogs}
         blogsMeta={blogsMeta}
       />

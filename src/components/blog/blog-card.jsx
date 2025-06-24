@@ -60,6 +60,7 @@ const BlogCard = ({ blog, variant = "default", index = 0 }) => {
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 loading="lazy"
+                priority={false}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
@@ -155,7 +156,7 @@ const BlogCard = ({ blog, variant = "default", index = 0 }) => {
             </div>
 
             {/* Title */}
-            <h3 className="text-xl md:text-2xl font-heading text-foreground mb-4 line-clamp-2 group-hover:text-primary transition-colors duration-200 leading-tight">
+            <h3 className="text-xl md:text-2xl font-heading text-foreground mb-4 line-clamp-2 group-hover:text-primary/90 transition-colors duration-200 leading-tight">
               {title}
             </h3>
 

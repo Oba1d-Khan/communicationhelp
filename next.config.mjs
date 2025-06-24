@@ -1,3 +1,4 @@
+import withPlaiceholder from "@plaiceholder/next";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,8 +10,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-    // domains: ["cdn.sanity.io"],
   },
 };
 
-export default nextConfig;
+export default withPlaiceholder(nextConfig);
