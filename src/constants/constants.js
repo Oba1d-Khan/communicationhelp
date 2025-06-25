@@ -8,7 +8,7 @@ export const navLinks = {
   ],
   right: [
     { title: "About", href: "/about", hasDropdown: false },
-    { title: "Connect", href: "/connect", hasDropdown: false },
+    { title: "Join Now", href: "/join", hasDropdown: false },
   ],
 };
 

@@ -227,7 +227,7 @@ const ModernNavbar = () => {
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
-                            className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md border border-primary/20 rounded-xl shadow-xl z-50"
+                            className="absolute top-full left-0 mt-2 w-56 bg-slate-100/90 backdrop-blur-lg border border-primary/20 rounded-xl shadow-xl z-50"
                           >
                             <div className="p-2">
                               {topicsDropdown.map((topic, index) => (
