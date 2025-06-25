@@ -159,7 +159,7 @@ const ReadingList = ({ books }) => {
           {/* Enhanced Header */}
           <motion.div
             variants={itemVariants}
-            className="max-w-4xl mx-auto text-center mb-16 md:mb-20"
+            className="section-content text-center mt-8 mb-16 md:mb-14"
           >
             <motion.div
               className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full border border-primary/20 shadow-lg mb-6"
@@ -191,7 +191,7 @@ const ReadingList = ({ books }) => {
             >
               Recommended{" "}
               <span className="text-primary relative inline-block">
-                Reading
+                Readings
                 <motion.div
                   className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"
                   initial={{ scaleX: 0 }}
@@ -215,45 +215,8 @@ const ReadingList = ({ books }) => {
           {/* Enhanced Search and Filter */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col gap-6 mb-16 md:mb-20 items-center justify-center"
+            className="flex gap-6 mb-16  md:mb-12 items-center justify-center"
           >
-            {/* Enhanced Search Bar */}
-            <motion.div
-              className="relative w-full max-w-md"
-              whileFocus={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div
-                className={`relative transition-all duration-300 ${isSearchFocused ? "transform scale-105" : ""}`}
-              >
-                <Search
-                  className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
-                    isSearchFocused ? "text-primary" : "text-text-light"
-                  }`}
-                />
-                <input
-                  type="text"
-                  placeholder="Search books or authors..."
-                  className="w-full pl-12 pr-6 py-4 border-2 border-primary/20 rounded-2xl bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-base transition-all duration-300 hover:border-primary/40 focus:bg-white shadow-lg hover:shadow-xl"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onFocus={() => setIsSearchFocused(true)}
-                  onBlur={() => setIsSearchFocused(false)}
-                />
-                {searchQuery && (
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"
-                    onClick={() => setSearchQuery("")}
-                  >
-                    ×
-                  </motion.button>
-                )}
-              </div>
-            </motion.div>
-
             {/* Enhanced Filter Buttons */}
             <motion.div
               className="flex flex-wrap gap-3 justify-center"
@@ -276,7 +239,7 @@ const ReadingList = ({ books }) => {
                     setToggleCategory(false);
                   }}
                 >
-                  <Filter className="w-4 h-4 mr-2" />
+                  {/* <Filter className="w-4 h-4 mr-2" /> */}
                   All Books
                 </Button>
               </motion.div>
@@ -320,7 +283,7 @@ const ReadingList = ({ books }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.6 }}
-                className="mb-20 md:mb-24"
+                className="mb-20 md:mb-24 border-2 border-black"
               >
                 <motion.div
                   className="flex items-center justify-center mb-10"
@@ -460,31 +423,22 @@ const ReadingList = ({ books }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="section-content"
           >
             <motion.div
-              className="flex items-center justify-center mb-10"
+              className="flex items-center justify-center mt-10 mb-12"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
               <div className="bg-gradient-to-r from-secondary/10 via-primary/10 to-secondary/10 backdrop-blur-sm px-8 py-4 rounded-2xl border border-primary/20 shadow-lg">
-                <h3 className="text-2xl md:text-3xl font-heading text-foreground flex items-center gap-3">
+                <h3 className="text-xl md:text-3xl font-heading gradient-theme text-shadow-sm flex items-center gap-3">
                   <BookOpen className="h-7 w-7 text-primary" />
                   {activeCategory === "all"
                     ? "All Books"
                     : books.find((c) => c.category === activeCategory)
                         ?.category || "Books"}
-                  <motion.div
-                    animate={{ y: [-2, 2, -2] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <TrendingUp className="h-5 w-5 text-success" />
-                  </motion.div>
                 </h3>
               </div>
             </motion.div>
@@ -580,11 +534,11 @@ const ReadingList = ({ books }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="mt-16 text-center"
+                className="section-content mt-16 text-center"
               >
                 <div className="bg-white/80 backdrop-blur-sm px-6 py-4 rounded-2xl border border-primary/10 shadow-lg inline-block">
                   <p className="text-sm text-text-light italic flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                    <Sparkles className="w-5 h-5 text-primary" />
                     Note: Book covers might only be visible with ad blockers
                     turned off.
                   </p>

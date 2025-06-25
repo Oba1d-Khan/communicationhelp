@@ -16,7 +16,7 @@ export default async function RecommendedReadingPage() {
   console.log(books);
 
   return (
-    <main className="root-layout min-h-screen">
+    <main className="min-h-screen">
       <ReadingList books={books} />
     </main>
   );
