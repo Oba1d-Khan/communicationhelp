@@ -167,7 +167,7 @@ const BlogCard = ({ blog, variant = "default", index = 0 }) => {
 
             {/* Read More */}
             <div className="mt-auto pt-4 border-t border-primary/10">
-              <span className="inline-flex items-center text-primary font-semibold group-hover:text-secondary transition-colors duration-200">
+              <span className="inline-flex items-center text-sm text-primary font-semibold group-hover:text-secondary transition-colors duration-200">
                 Read Article
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform duration-200" />
               </span>

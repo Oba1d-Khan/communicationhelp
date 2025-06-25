@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import BlogSlider from "@/components/blog/blog-slider";
 import BlogCard from "@/components/blog/blog-card";
 import { Button } from "@/components/ui/button";
@@ -12,12 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import CTASimple from "../shared/CTA-simple";
 
 export default function BlogMain({ blogs, topics }) {
   const [selectedTopic, setSelectedTopic] = useState("All");
   const [sortBy, setSortBy] = useState("newest");
   const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(9);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Create topics array with "All" option
   const topicOptions = [{ title: "All", slug: "all" }, ...topics];
@@ -63,6 +64,31 @@ export default function BlogMain({ blogs, topics }) {
     return sorted;
   }, [blogs, selectedTopic, searchQuery, sortBy]);
 
+  // Add mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+      setVisibleCount(window.innerWidth < 768 ? 6 : 9);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(isMobile ? 6 : 9);
+  }, [selectedTopic, searchQuery, sortBy, isMobile]);
+
+  // Get visible blogs based on pagination
+  const visibleBlogs = useMemo(() => {
+    return filteredAndSortedBlogs.slice(0, visibleCount);
+  }, [filteredAndSortedBlogs, visibleCount]);
+
+  // Check if there are more blogs to load
+  const hasMoreBlogs = filteredAndSortedBlogs.length > visibleCount;
+
   const featured = useMemo(() => {
     return blogs.filter((blog) => blog.featured);
   }, [blogs]);
@@ -71,6 +97,11 @@ export default function BlogMain({ blogs, topics }) {
     setSearchQuery("");
     setSelectedTopic("All");
     setSortBy("newest");
+  };
+
+  const loadMoreBlogs = () => {
+    const increment = isMobile ? 6 : 9;
+    setVisibleCount((prev) => prev + increment);
   };
 
   // Lightning-fast animation variants
@@ -107,8 +138,8 @@ export default function BlogMain({ blogs, topics }) {
       <section className="section-wrapper">
         <div className="section-content py-16 md:py-20 lg:py-24">
           <div className="max-w-7xl mx-auto animate-fadeIn">
-            {/* Filters and Search - Instant appearance */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 mb-8 border border-primary/10 shadow-lg">
+            {/*  Search and Filters Bar */}
+            <div className="bg-gradient-to-tl from-white/90 via-primary/5 to-secondary/5 backdrop-blur-sm rounded-3xl p-6 md:p-4 mb-8 border border-primary/10 shadow-md">
               <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
                 {/* Search */}
                 <div className="relative w-full lg:w-auto lg:min-w-[320px]">
@@ -116,9 +147,20 @@ export default function BlogMain({ blogs, topics }) {
                   <input
                     type="text"
                     placeholder="Search articles or topics..."
-                    className="w-full pl-12 pr-10 py-3 border-2 border-primary/20 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-base transition-all duration-150 hover:border-primary/40"
+                    className="w-full pl-12 pr-10 py-3 md:py-2 border-2 border-primary/20 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-base transition-all duration-150 hover:border-primary/40"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => {
+                      console.log("Search input value:", e.target.value);
+                      setSearchQuery(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      // Ensure spaces are allowed
+                      if (e.key === " ") {
+                        e.stopPropagation();
+                      }
+                    }}
+                    spellCheck="false"
+                    autoComplete="off"
                   />
                   {searchQuery && (
                     <button
@@ -186,6 +228,10 @@ export default function BlogMain({ blogs, topics }) {
               <p className="text-text-light text-lg">
                 Showing{" "}
                 <span className="font-semibold text-foreground">
+                  {visibleBlogs.length}
+                </span>{" "}
+                of{" "}
+                <span className="font-semibold text-foreground">
                   {filteredAndSortedBlogs.length}
                 </span>{" "}
                 article
@@ -214,7 +260,7 @@ export default function BlogMain({ blogs, topics }) {
 
             {/* Blog Grid - Ultra-fast transitions */}
             <AnimatePresence mode="wait">
-              {filteredAndSortedBlogs.length > 0 ? (
+              {visibleBlogs.length > 0 ? (
                 <motion.div
                   key="blog-grid"
                   variants={containerVariants}
@@ -222,7 +268,7 @@ export default function BlogMain({ blogs, topics }) {
                   animate="visible"
                   className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
                 >
-                  {filteredAndSortedBlogs.map((blog, index) => (
+                  {visibleBlogs.map((blog, index) => (
                     <BlogCard
                       key={blog.id || index}
                       blog={blog}
@@ -263,14 +309,19 @@ export default function BlogMain({ blogs, topics }) {
             </AnimatePresence>
 
             {/* Load More Button */}
-            {filteredAndSortedBlogs.length > 0 && (
+            {hasMoreBlogs && (
               <div className="text-center mt-12 animate-fadeIn">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="px-8 py-4 rounded-full border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 shadow-lg hover:shadow-xl"
+                  onClick={loadMoreBlogs}
+                  className="px-8 py-4  rounded-full border-primary/30 bg-gradient-theme text-white transition-all duration-300 shadow-lg hover:shadow-xl  scale-95 hover:scale-105"
                 >
-                  Load More Articles
+                  Load More (
+                  <span className="font-semibold">
+                    {filteredAndSortedBlogs.length - visibleCount}
+                  </span>
+                  )
                 </Button>
               </div>
             )}
