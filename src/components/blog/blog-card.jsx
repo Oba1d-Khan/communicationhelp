@@ -1,9 +1,9 @@
 "use client";
 
-import { formattedDate } from "@/sanity/utils/date";
-import { getPlainTextFromPortableText } from "@/sanity/utils/getPlainTextFromPortableText";
-import { calculateReadTime } from "@/sanity/utils/readTime";
-import { urlForImage } from "@/sanity/utils/urlFor";
+import { formattedDate } from "../../../sanity/utils/date";
+import { getPlainTextFromPortableText } from "../../../sanity/utils/getPlainTextFromPortableText";
+import { calculateReadTime } from "../../../sanity/utils/readTime";
+import { urlForImage } from "../../../sanity/utils/urlFor";
 import { Calendar, Clock, Tag, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

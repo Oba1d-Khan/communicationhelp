@@ -12,11 +12,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import BlogCard from "@/components/blog/blog-card";
-import { urlForImage } from "@/sanity/utils/urlFor";
-import { formattedDate } from "@/sanity/utils/date";
-import { calculateReadTime } from "@/sanity/utils/readTime";
+import { urlForImage } from "../../../sanity/utils/urlFor";
+import { formattedDate } from "../../../sanity/utils/date";
+import { calculateReadTime } from "../../../sanity/utils/readTime";
 import PortableRenderer from "../shared/PortableRenderer";
-import { getPlainTextFromPortableText } from "@/sanity/utils/getPlainTextFromPortableText";
+import { getPlainTextFromPortableText } from "../../../sanity/utils/getPlainTextFromPortableText";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef } from "react";
 

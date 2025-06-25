@@ -1,11 +1,11 @@
 import BlogSingle from "@/components/blog/blog-single";
-import { client } from "@/sanity/client";
+import { client } from "../../../../sanity/client";
 import {
   ALL_BLOGS_META_QUERY,
   BLOG_BY_SLUG_QUERY,
   RELATED_BLOGS_QUERY,
-} from "@/sanity/utils/queries";
-import { urlForImage } from "@/sanity/utils/urlFor";
+} from "../../../../sanity/utils/queries";
+import { urlForImage } from "../../../../sanity/utils/urlFor";
 import { getBlurPlaceholder } from "@/utils/blur-placeholder";
 import React from "react";
 

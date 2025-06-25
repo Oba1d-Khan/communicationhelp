@@ -1,7 +1,10 @@
 import LoaderGradient from "@/components/shared/LoaderGradient";
 import TopicsList from "@/components/topics/topics-list";
-import { client } from "@/sanity/client";
-import { ALL_BLOGS_QUERY, ALL_TOPICS_QUERY } from "@/sanity/utils/queries";
+import { client } from "../../../sanity/client";
+import {
+  ALL_BLOGS_QUERY,
+  ALL_TOPICS_QUERY,
+} from "../../../sanity/utils/queries";
 import { Suspense } from "react";
 
 export const metadata = {

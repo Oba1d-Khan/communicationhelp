@@ -1,7 +1,7 @@
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
-import { urlForImage as urlFor } from "@/sanity/utils/urlFor";
+import { urlForImage as urlFor } from "../../../sanity/utils/urlFor";
 
 // Estimate blog image width
 const MAX_IMAGE_WIDTH = 800;

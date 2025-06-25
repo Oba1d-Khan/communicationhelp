@@ -1,6 +1,6 @@
 import ReadingList from "@/components/recommended-readings/ReadingList";
-import { BOOKS_BY_CATEGORY_QUERY } from "@/sanity/utils/queries";
-import { client } from "@/sanity/client";
+import { BOOKS_BY_CATEGORY_QUERY } from "../../../sanity/utils/queries";
+import { client } from "../../../sanity/client";
 
 const options = { next: { revalidate: 60 } };
 

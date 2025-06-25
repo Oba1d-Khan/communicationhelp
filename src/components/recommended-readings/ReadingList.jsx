@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { urlForImage } from "@/sanity/utils/urlFor";
+import { urlForImage } from "../../../sanity/utils/urlFor";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ReadingList = ({ books }) => {

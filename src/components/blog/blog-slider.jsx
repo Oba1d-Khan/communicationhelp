@@ -12,8 +12,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { formattedDate } from "@/sanity/utils/date";
-import { urlForImage } from "@/sanity/utils/urlFor";
+import { formattedDate } from "../../../sanity/utils/date";
+import { urlForImage } from "../../../sanity/utils/urlFor";
 import { motion, AnimatePresence } from "framer-motion";
 
 const BlogSlider = ({ featuredBlogs }) => {

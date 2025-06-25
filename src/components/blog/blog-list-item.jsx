@@ -1,7 +1,7 @@
 "use client";
 
-import { formattedDate } from "@/sanity/utils/date";
-import { urlForImage } from "@/sanity/utils/urlFor";
+import { formattedDate } from "../../../sanity/utils/date";
+import { urlForImage } from "../../../sanity/utils/urlFor";
 import { Calendar, Tag, ArrowRight, Clock, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

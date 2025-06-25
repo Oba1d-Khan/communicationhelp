@@ -1,6 +1,9 @@
 import BlogMain from "@/components/blog/blog-main";
-import { client } from "@/sanity/client";
-import { ALL_BLOGS_QUERY, ALL_TOPICS_QUERY } from "@/sanity/utils/queries";
+import { client } from "../../../sanity/client";
+import {
+  ALL_BLOGS_QUERY,
+  ALL_TOPICS_QUERY,
+} from "../../../sanity/utils/queries";
 import React from "react";
 
 const options = { next: { revalidate: 60 } };

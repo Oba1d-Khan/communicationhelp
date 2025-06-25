@@ -15,10 +15,10 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { urlForImage } from "@/sanity/utils/urlFor";
-import { formattedDate } from "@/sanity/utils/date";
-import { getPlainTextFromPortableText } from "@/sanity/utils/getPlainTextFromPortableText";
-import { calculateReadTime } from "@/sanity/utils/readTime";
+import { urlForImage } from "../../../sanity/utils/urlFor";
+import { formattedDate } from "../../../sanity/utils/date";
+import { getPlainTextFromPortableText } from "../../../sanity/utils/getPlainTextFromPortableText";
+import { calculateReadTime } from "../../../sanity/utils/readTime";
 import {
   Select,
   SelectContent,

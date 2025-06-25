@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
-import { client } from "@/sanity/client";
-import { ALL_BLOGS_QUERY } from "@/sanity/utils/queries";
+import { client } from "../../../sanity/client";
+import { ALL_BLOGS_QUERY } from "../../../sanity/utils/queries";
 import Link from "next/link";
 import BlogListItem from "./blog-list-item";
 
