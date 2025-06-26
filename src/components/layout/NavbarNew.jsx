@@ -1,8 +1,9 @@
 "use client";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, Search, X, ChevronDown } from "lucide-react";
+import { Menu, Search, X, ChevronDown, Clock, TrendingUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { navLinks } from "@/constants/constants";
 
@@ -75,13 +76,90 @@ const searchVariants = {
   },
 };
 
+const suggestionVariants = {
+  hidden: { opacity: 0, y: -5 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.15,
+      staggerChildren: 0.02,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: { opacity: 1, x: 0 },
+};
+
 const ModernNavbar = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [mobileSearchValue, setMobileSearchValue] = useState("");
   const [topicsHovered, setTopicsHovered] = useState(false);
   const [mobileTopicsOpen, setMobileTopicsOpen] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [recentSearches, setRecentSearches] = useState([]);
+  const [showMobileSuggestions, setShowMobileSuggestions] = useState(false);
+
+  const searchInputRef = useRef(null);
+  const mobileSearchInputRef = useRef(null);
+
+  // Load recent searches from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("recentSearches");
+    if (saved) {
+      try {
+        setRecentSearches(JSON.parse(saved));
+      } catch (e) {
+        console.error("Error loading recent searches:", e);
+      }
+    }
+  }, []);
+
+  // Save recent searches to localStorage
+  const saveRecentSearch = useCallback((query) => {
+    if (!query.trim()) return;
+
+    setRecentSearches((prev) => {
+      const filtered = prev.filter(
+        (item) => item.toLowerCase() !== query.toLowerCase()
+      );
+      const updated = [query, ...filtered].slice(0, 4); // Keep last 4 searches
+      localStorage.setItem("recentSearches", JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
+
+  // Handle search submission
+  const handleSearch = useCallback(
+    (query) => {
+      const trimmedQuery = query.trim();
+      if (!trimmedQuery) return;
+
+      saveRecentSearch(trimmedQuery);
+      setSearchExpanded(false);
+      setShowSuggestions(false);
+      setSearchValue("");
+      setMobileSearchValue("");
+      setIsOpen(false);
+
+      router.push(`/search?q=${encodeURIComponent(trimmedQuery)}`);
+    },
+    [router, saveRecentSearch]
+  );
+
+  // Handle recent search click
+  const handleRecentSearchClick = useCallback(
+    (query) => {
+      handleSearch(query);
+    },
+    [handleSearch]
+  );
 
   // Optimized scroll handler with throttling
   const handleScroll = useCallback(() => {
@@ -108,12 +186,50 @@ const ModernNavbar = () => {
     return () => window.removeEventListener("scroll", throttledScroll);
   }, [handleScroll]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSearchExpanded(false);
+        setShowSuggestions(false);
+      }
+      if (e.key === "/" && !searchExpanded) {
+        e.preventDefault();
+        setSearchExpanded(true);
+        setTimeout(() => searchInputRef.current?.focus(), 100);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [searchExpanded]);
+
   // Memoized handlers for better performance
-  const closeMobileMenu = useCallback(() => setIsOpen(false), []);
-  const handleSearchExpand = useCallback(() => setSearchExpanded(true), []);
+  const closeMobileMenu = useCallback(() => {
+    setIsOpen(false);
+    setShowMobileSuggestions(false);
+  }, []);
+
+  const handleSearchExpand = useCallback(() => {
+    setSearchExpanded(true);
+    setShowSuggestions(true);
+    setTimeout(() => searchInputRef.current?.focus(), 100);
+  }, []);
+
   const handleSearchCollapse = useCallback(() => {
-    if (!searchValue) setSearchExpanded(false);
-  }, [searchValue]);
+    if (!searchValue && !showSuggestions) {
+      setSearchExpanded(false);
+    }
+  }, [searchValue, showSuggestions]);
+
+  const handleSearchFocus = useCallback(() => {
+    setShowSuggestions(true);
+  }, []);
+
+  const handleSearchBlur = useCallback(() => {
+    // Delay hiding suggestions to allow clicks
+    setTimeout(() => setShowSuggestions(false), 150);
+  }, []);
 
   // Memoized navbar classes
   const navbarClasses = useMemo(
@@ -146,17 +262,14 @@ const ModernNavbar = () => {
             <div className="flex items-center space-x-4 lg:space-x-6">
               {/* Desktop Search */}
               <div className="hidden lg:block relative">
-                <div
-                  className="relative"
-                  onMouseEnter={handleSearchExpand}
-                  onMouseLeave={handleSearchCollapse}
-                >
+                <div className="relative" onMouseLeave={handleSearchCollapse}>
                   <button
                     className="flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium text-foreground hover:text-primary hover:bg-gradient-to-r hover:from-secondary/20 hover:to-primary/10 transition-all duration-200 border border-transparent hover:border-primary/20 whitespace-nowrap"
                     onClick={handleSearchExpand}
                   >
                     <Search size={16} />
                     <span>Search</span>
+                    <span className="text-xs text-text-light ml-1">/</span>
                   </button>
 
                   <AnimatePresence>
@@ -166,21 +279,96 @@ const ModernNavbar = () => {
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        className="absolute top-0 left-0 z-50 w-80"
+                        className="absolute top-0 left-0 z-50 w-96"
                       >
                         <div className="relative">
                           <Search
                             size={16}
                             className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-light z-10"
                           />
-                          <input
-                            type="search"
-                            placeholder="Search articles, topics..."
-                            value={searchValue}
-                            onChange={(e) => setSearchValue(e.target.value)}
-                            className="w-full pl-12 pr-4 py-2.5 bg-white/95 backdrop-blur-sm border-2 border-primary/30 rounded-xl text-sm text-foreground placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-200 shadow-lg focus:shadow-xl"
-                            autoFocus
-                          />
+                          <form
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                              handleSearch(searchValue);
+                            }}
+                          >
+                            <input
+                              ref={searchInputRef}
+                              type="search"
+                              placeholder="Search articles, topics..."
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              onFocus={handleSearchFocus}
+                              onBlur={handleSearchBlur}
+                              className="w-full pl-12 pr-4 py-2.5 bg-white/95 backdrop-blur-sm border-2 border-primary/30 rounded-xl text-sm text-foreground placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-200 shadow-lg focus:shadow-xl"
+                              autoComplete="off"
+                            />
+                          </form>
+
+                          {/* Desktop Dropdown - Both Recent & Popular */}
+                          <AnimatePresence>
+                            {showSuggestions && (
+                              <motion.div
+                                variants={suggestionVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="hidden"
+                                className="absolute top-full left-0 right-0 mt-2 bg-slate-100 backdrop-blur-lg border border-primary/20 rounded-xl shadow-xl z-50 max-h-80 overflow-y-auto"
+                              >
+                                <div className="p-3">
+                                  {/* Recent Searches */}
+                                  {recentSearches.length > 0 && (
+                                    <div className="mb-4">
+                                      <div className="flex items-center gap-2 px-2 py-1 text-xs font-medium text-text-light mb-2">
+                                        <Clock size={12} />
+                                        Recent searches
+                                      </div>
+                                      {recentSearches.map((query, index) => (
+                                        <motion.button
+                                          key={index}
+                                          variants={itemVariants}
+                                          onClick={() =>
+                                            handleRecentSearchClick(query)
+                                          }
+                                          className="w-full text-left px-3 py-2 text-sm text-foreground hover:bg-primary/10 rounded-lg transition-colors duration-150 flex items-center gap-2"
+                                        >
+                                          <Clock
+                                            size={14}
+                                            className="text-text-light"
+                                          />
+                                          {query}
+                                        </motion.button>
+                                      ))}
+                                    </div>
+                                  )}
+
+                                  {/* Divider */}
+                                  {recentSearches.length > 0 && (
+                                    <div className="border-t border-primary/10 my-3" />
+                                  )}
+
+                                  {/* Popular Searches */}
+                                  <div>
+                                    <div className="flex items-center gap-2 px-2 py-1 text-xs font-medium text-text-light mb-2">
+                                      <TrendingUp size={12} />
+                                      Popular searches
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                      {popularSearches.map((term) => (
+                                        <button
+                                          key={term}
+                                          onClick={() => handleSearch(term)}
+                                          className="px-3 py-1.5 bg-secondary/20 text-foreground text-xs rounded-full hover:bg-secondary/40 transition-all duration-150 border border-primary/20"
+                                        >
+                                          {term}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </div>
                       </motion.div>
                     )}
@@ -227,7 +415,7 @@ const ModernNavbar = () => {
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
-                            className="absolute top-full left-0 mt-2 w-56 bg-slate-100/90 backdrop-blur-lg border border-primary/20 rounded-xl shadow-xl z-50"
+                            className="absolute top-full left-0 mt-2 w-56 bg-slate-100 backdrop-blur-lg border border-primary/20 rounded-xl shadow-xl z-50"
                           >
                             <div className="p-2">
                               {topicsDropdown.map((topic, index) => (
@@ -332,27 +520,81 @@ const ModernNavbar = () => {
 
               {/* Mobile Search */}
               <div className="p-6 border-b border-primary/20">
-                <div className="relative w-full">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSearch(mobileSearchValue);
+                  }}
+                  className="relative w-full mb-1"
+                >
                   <Search
                     size={18}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-light"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-light z-10"
                   />
                   <input
+                    ref={mobileSearchInputRef}
                     type="search"
                     placeholder="Search articles, topics..."
-                    className="w-full pl-12 pr-4 py-3.5 bg-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl text-base text-foreground placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-200"
+                    value={mobileSearchValue}
+                    onChange={(e) => setMobileSearchValue(e.target.value)}
+                    onFocus={() => setShowMobileSuggestions(true)}
+                    onBlur={() =>
+                      setTimeout(() => setShowMobileSuggestions(false), 150)
+                    }
+                    className="w-full pl-12 pr-4 py-3 bg-white/90 backdrop-blur-sm border-2 border-primary/30 rounded-xl text-base text-foreground placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-200"
+                    autoComplete="off"
                   />
-                </div>
+                </form>
 
-                <div className="mt-4">
-                  <p className="text-xs font-medium text-text-light mb-3">
-                    Popular searches:
-                  </p>
+                {/* Mobile Recent Searches Dropdown - Only history */}
+                <AnimatePresence>
+                  {showMobileSuggestions && recentSearches.length > 0 && (
+                    <motion.div
+                      variants={suggestionVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                      className="mt-0  bg-white backdrop-blur-lg border border-primary/20  rounded-xl shadow-xl"
+                    >
+                      <div className="p-3">
+                        <div className="flex items-center gap-2 px-2 py-1 text-xs font-medium text-text-light mb-2">
+                          <Clock size={12} />
+                          Recent searches
+                        </div>
+                        {recentSearches.map((query, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              setMobileSearchValue(query);
+                              handleSearch(query);
+                            }}
+                            className="w-full text-left px-3 py-2 text-sm text-foreground hover:bg-primary/10 rounded-lg transition-colors duration-150 flex items-center gap-2"
+                          >
+                            <Clock size={14} className="text-text-light" />
+                            {query}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                {/* Mobile Popular Searches - Outside dropdown */}
+                <div>
+                  <div className="flex items-center gap-2 mt-5 mb-3">
+                    <TrendingUp size={16} className="text-text-light" />
+                    <h3 className="text-sm  font-medium text-text-light">
+                      Popular Searches
+                    </h3>
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {popularSearches.map((term) => (
                       <button
                         key={term}
-                        className="px-3 py-1.5 bg-secondary/40 text-foreground text-xs rounded-full hover:bg-secondary/60 transition-all duration-150 border border-primary/20"
+                        onClick={() => {
+                          setMobileSearchValue(term);
+                          handleSearch(term);
+                        }}
+                        className="px-3 py-2 bg-secondary/15 text-foreground text-xs  rounded-full hover:bg-secondary/40 transition-all duration-150 border border-primary/20"
                       >
                         {term}
                       </button>

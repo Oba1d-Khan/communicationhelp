@@ -53,15 +53,6 @@ export default function Loading() {
                       <Skeleton className="h-6 sm:h-7 md:h-8 w-4/5" />
                       <Skeleton className="h-6 sm:h-7 md:h-8 w-3/5" />
                     </div>
-
-                    {/* Author */}
-                    <div className="flex items-center gap-2 sm:gap-3 pt-3 sm:pt-4 border-t border-primary/10">
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-primary/10 flex items-center justify-center"></div>
-                      <div className="space-y-1">
-                        <Skeleton className="h-4 w-24" />
-                        <Skeleton className="h-3 w-16" />
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>

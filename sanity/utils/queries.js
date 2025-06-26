@@ -65,3 +65,28 @@ export const RELATED_BLOGS_QUERY = `
     topic->{title, _id}
   }
 `
+// Make sure this query is properly exported and working
+export const BLOG_SEARCH_QUERY = `*[_type == "blog" && (
+  title match $query + "*" || 
+  excerpt match $query + "*" || 
+  pt::text(content) match $query + "*" ||
+  topic->title match $query + "*"
+)] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  publishedAt,
+  coverImage,
+  topic->{
+    _id,
+    title
+  }
+}[0...20]`
+
+// Query for search suggestions (just titles)
+export const BLOG_SUGGESTIONS_QUERY = `*[_type == "blog" && title match $query + "*"] | order(publishedAt desc) {
+  _id,
+  title,
+  slug
+}[0...5]`
