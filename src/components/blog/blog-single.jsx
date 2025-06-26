@@ -199,7 +199,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
       },
     },
   };
-  console.log("blog", blog);
+  // console.log("blog", blog);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-primary/5 relative">

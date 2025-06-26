@@ -132,7 +132,13 @@ export default function BlogMain({ blogs, topics }) {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Hero Slider Section */}
       <section className="section-wrapper mt-16">
-        <BlogSlider featuredBlogs={featured} />
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+        >
+          <BlogSlider featuredBlogs={featured} />
+        </motion.div>
       </section>
       {/* Main Content */}
       <section className="section-wrapper">
