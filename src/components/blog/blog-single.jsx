@@ -228,15 +228,15 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-16 md:top-18 left-0 right-0 z-40"
+            className="fixed top-16 lg:top-18 left-0 right-0 z-40"
           >
             <div className="relative">
               {/* Background Bar */}
-              <div className="h-1 md:h-1.5 bg-gradient-to-r from-gray-200/60 via-gray-200/80 to-gray-200/60 backdrop-blur-sm shadow-sm" />
+              <div className="h-1.5 bg-gradient-to-r from-gray-200/60 via-gray-200/80 to-gray-200/60 backdrop-blur-sm shadow-sm " />
 
               {/* Progress Fill */}
               <motion.div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 shadow-sm"
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 shadow-sm rounded-full"
                 style={{ width: `${readingProgress}%` }}
                 transition={{ duration: 0.1, ease: "linear" }}
               />
@@ -510,8 +510,8 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 <span className="text-sm font-semibold text-primary">
                   {relatedBlogs.length === 1
-                    ? "Related Article"
-                    : "More Articles"}
+                    ? "Related Blogs"
+                    : "You Might Also Like"}
                 </span>
               </motion.div>
 
@@ -553,7 +553,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
                     size="lg"
                     className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-200 group"
                   >
-                    <span>Explore All Articles</span>
+                    <span>Explore All Blogs</span>
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform duration-200" />
                   </Button>
                 </Link>

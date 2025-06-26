@@ -28,7 +28,7 @@ const BlogSinglePage = async ({ params }) => {
 
   const imageUrl = urlForImage(blog.coverImage.asset._ref).url();
   const blurDataURL = await getBlurPlaceholder(imageUrl);
-  console.log("blurDataURL", blurDataURL);
+  // console.log("blurDataURL", blurDataURL);
 
   const blogWithBlur = {
     ...blog,
