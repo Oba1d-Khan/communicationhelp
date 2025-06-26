@@ -2,10 +2,10 @@ import React from "react";
 
 const LoaderGradient = () => {
   return (
-    <div class="absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
-      <div class="p-4 bg-gradient-to-tr animate-spin from-green-500 to-blue-500 via-purple-500 rounded-full">
-        <div class="bg-white rounded-full">
-          <div class="w-20 h-20 rounded-full"></div>
+    <div class="bg-transparent w-full min-h-screen flex justify-center items-center">
+      <div class="flex min-h-screen w-full items-center justify-center bg-gray-200">
+        <div class="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 animate-spin">
+          <div class="h-9 w-9 rounded-full bg-gray-200"></div>
         </div>
       </div>
     </div>
