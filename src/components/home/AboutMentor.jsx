@@ -79,34 +79,34 @@ const AboutMentor = () => {
 
   const statsData = [
     {
-      value: "35",
+      value: "35+",
       label: "Years Experience",
       icon: Award,
-      gradient: "from-blue-500 to-blue-600",
+      gradient: "from-blue-400 to-blue-600",
       lightBg: "from-blue-50 to-blue-100",
       iconColor: "text-blue-600",
     },
     {
-      value: "2.5M",
+      value: "2.5M+",
       label: "YouTube Views",
       icon: Play,
-      gradient: "from-red-500 to-red-600",
+      gradient: "from-red-400 to-red-600",
       lightBg: "from-red-50 to-red-100",
       iconColor: "text-red-600",
     },
     {
-      value: "339K",
+      value: "339K+",
       label: "TikTok Followers",
       icon: Users,
-      gradient: "from-pink-500 to-pink-600",
+      gradient: "from-pink-400 to-pink-600",
       lightBg: "from-pink-50 to-pink-100",
       iconColor: "text-pink-600",
     },
     {
-      value: "$17M",
+      value: "$17M+",
       label: "Research Funding",
       icon: TrendingUp,
-      gradient: "from-green-500 to-green-600",
+      gradient: "from-green-400 to-green-600",
       lightBg: "from-green-50 to-green-100",
       iconColor: "text-green-600",
     },
@@ -179,7 +179,7 @@ const AboutMentor = () => {
             {/* Left Column - Main Content */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-7 space-y-8 lg:pr-6 relative z-20"
+              className="lg:col-span-7 lg:w-[90%] space-y-8 lg:pr-6 relative z-20"
             >
               {/* Refined Badge */}
               <motion.div
@@ -216,19 +216,19 @@ const AboutMentor = () => {
                   {/* Main Title */}
                   <motion.h1 className="relative mb-6">
                     <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-heading leading-tight">
-                      <span className="text-foreground font-bold">
+                      <span className="gradient-heading font-bold ">
                         Listening to Lead:
                       </span>
                     </span>
-                    <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-heading leading-tight mt-2">
+                    <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-heading leading-tight mt-1">
                       <span className="text-primary relative">
                         Become the Person People Trust
-                        <motion.div
+                        {/* <motion.div
                           className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"
                           initial={{ scaleX: 0 }}
                           animate={{ scaleX: 1 }}
                           transition={{ duration: 1, delay: 1 }}
-                        />
+                        /> */}
                       </span>
                     </span>
                   </motion.h1>
@@ -259,7 +259,7 @@ const AboutMentor = () => {
                 </motion.div>
 
                 <motion.p
-                  className="text-base md:text-lg text-text-light leading-relaxed max-w-2xl mx-auto lg:mx-0"
+                  className="text-base md:text-md text-text-light leading-relaxed max-w-2xl mx-auto lg:mx-0"
                   variants={itemVariants}
                 >
                   Join the waitlist for{" "}
@@ -281,7 +281,7 @@ const AboutMentor = () => {
                   What you'll master:
                 </motion.h3>
 
-                <motion.div className="relative">
+                <motion.div className="relative lg:mr-6">
                   <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 md:p-7 border border-primary/15 shadow-xl">
                     <div className="grid gap-4">
                       {benefits.slice(0, 4).map((benefit, index) => (

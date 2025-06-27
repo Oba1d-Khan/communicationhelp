@@ -99,7 +99,7 @@ const CTA = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/4 w-40 h-40 bg-gradient-to-r from-secondary/15 to-primary/15 rounded-full blur-3xl"
+          className="absolute bottom-0 right-1/4 w-40 h-40 bg-gradient-to-r from-secondary/15 to-primary/15 rounded-full blur-3xl "
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.6, 0.4],
@@ -129,12 +129,12 @@ const CTA = () => {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-3xl" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-secondary/10 to-transparent rounded-tr-3xl" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-secondary/10 to-transparent rounded-tr-full" />
 
             {/* Floating Icons */}
             <motion.div
-              className="absolute top-6 left-6 text-primary/30"
+              className="top-2 left-2 absolute lg:top-6 lg:left-6 text-primary/30"
               animate={{ rotate: 360 }}
               transition={{
                 duration: 20,
@@ -142,7 +142,7 @@ const CTA = () => {
                 ease: "linear",
               }}
             >
-              <Sparkles className="w-16 h-16 opacity-50" />
+              <Sparkles className="w-14 h-14 lg:w-16 lg:h-16 opacity-40" />
             </motion.div>
             <motion.div
               className="absolute bottom-6 right-6 text-secondary/30"
@@ -154,7 +154,7 @@ const CTA = () => {
               }}
             ></motion.div>
 
-            <div className="relative z-10 text-center space-y-8">
+            <div className="relative z-10 text-center space-y-8 mt-10 lg:mt-0">
               {/* Badge */}
               <motion.div
                 variants={itemVariants}
@@ -175,7 +175,7 @@ const CTA = () => {
               {/* Headline */}
               <motion.div variants={itemVariants} className="space-y-4">
                 <motion.h2
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight"
+                  className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -187,7 +187,7 @@ const CTA = () => {
                 </motion.h2>
 
                 <motion.p
-                  className="text-lg md:text-xl text-text-light max-w-2xl mx-auto leading-relaxed"
+                  className="text-lg md:text-xl text-text-light max-w-2xl mx-auto lg:leading-relaxed"
                   variants={itemVariants}
                 >
                   Get our{" "}

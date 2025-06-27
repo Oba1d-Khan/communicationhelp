@@ -16,8 +16,9 @@ const dmSerif = DM_Serif_Display({
 });
 
 export const metadata = {
-  title: "Personal Blog",
-  description: "Welcome to my personal blog",
+  title: "Communication Help",
+  description:
+    "Improve your communication skills with expert insights on empathy, mental health, public speaking, and persuasive writing. Start your growth journey today.",
 };
 
 export default function RootLayout({ children }) {
