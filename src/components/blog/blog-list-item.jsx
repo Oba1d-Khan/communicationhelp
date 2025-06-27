@@ -46,10 +46,10 @@ const BlogListItem = ({ blog, index = 0 }) => {
         whileInView="visible"
         viewport={{ once: true, margin: "-20px", amount: 0.3 }}
         whileHover={{ y: -4, transition: { duration: 0.2 } }}
-        className="group relative grid md:grid-cols-2 gap-0 bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer border border-gray-100"
+        className="group relative grid md:grid-cols-2 gap-0 bg-white rounded-3xl shadow-lg hover:shadow-xl hover:z-300 transition-shadow duration-300 overflow-hidden cursor-pointer border border-gray-100"
       >
         {/* Image Section */}
-        <div className="relative overflow-hidden z-20">
+        <div className="relative overflow-hidden z-200 ">
           <motion.div
             className="aspect-[4/3] relative"
             variants={imageVariants}
@@ -61,7 +61,7 @@ const BlogListItem = ({ blog, index = 0 }) => {
               }
               alt={blog.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-105 hover:z-320"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               loading="lazy"
               priority={false}

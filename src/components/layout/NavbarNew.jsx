@@ -255,8 +255,8 @@ const ModernNavbar = () => {
 
   return (
     <>
-      <header className={navbarClasses}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className={`${navbarClasses} animate-slideDownSoft`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
           <div className="relative flex items-center justify-between h-16 lg:h-18">
             {/* Left Section - Search + Left Nav */}
             <div className="flex items-center space-x-4 lg:space-x-6">
@@ -447,7 +447,7 @@ const ModernNavbar = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <Link href="/" className="flex items-center group">
                 <div className="text-lg lg:text-2xl font-bold text-foreground group-hover:text-primary transition-all duration-200 group-hover:scale-105">
-                  Bruce Lambert.
+                  CommunicationHelp.
                 </div>
               </Link>
             </div>
