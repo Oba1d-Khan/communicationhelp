@@ -138,6 +138,11 @@ html {
     @apply bg-gradient-to-r from-primary to-secondary hover:from-primary/80 hover:to-secondary/80;
   }
 
+  .gradient-floating-icons {
+    @apply bg-gradient-to-r from-success to-secondary/70;
+  }
+
+
 
 }
 
