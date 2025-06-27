@@ -1,5 +1,5 @@
 "use client";
-import heroImg from "../../../public/images/hero-home2.jpg";
+import heroImg from "../../../public/images/hero-home.jpg";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
