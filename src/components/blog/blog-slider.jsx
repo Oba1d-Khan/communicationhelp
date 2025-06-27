@@ -215,7 +215,7 @@ const BlogSlider = ({ featuredBlogs }) => {
                           size="lg"
                           className="bg-white text-primary hover:bg-white/90 font-semibold px-6 sm:px-8 py-3 sm:py-4 transition-all duration-200 hover:scale-105 shadow-xl hover:shadow-2xl rounded-full group"
                         >
-                          Read Article
+                          Read Blog
                           <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 transition-transform duration-200" />
                         </Button>
                       </Link>

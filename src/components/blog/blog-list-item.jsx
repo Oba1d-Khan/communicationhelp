@@ -39,6 +39,7 @@ const BlogListItem = ({ blog, index = 0 }) => {
 
   return (
     <Link href={`/blog/${blog.slug.current}`} className="block">
+      <motion.div className="absolute inset-0 rounded-3xl bg-[radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:16px_16px] opacity-70 pointer-events-none z-10" />
       <motion.article
         variants={containerVariants}
         initial="hidden"
@@ -48,7 +49,7 @@ const BlogListItem = ({ blog, index = 0 }) => {
         className="group relative grid md:grid-cols-2 gap-0 bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer border border-gray-100"
       >
         {/* Image Section */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden z-20">
           <motion.div
             className="aspect-[4/3] relative"
             variants={imageVariants}

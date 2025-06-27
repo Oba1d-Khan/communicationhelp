@@ -447,7 +447,7 @@ const ModernNavbar = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <Link href="/" className="flex items-center group">
                 <div className="text-lg lg:text-2xl font-bold text-foreground group-hover:text-primary transition-all duration-200 group-hover:scale-105">
-                  Blog.
+                  Bruce Lambert.
                 </div>
               </Link>
             </div>

@@ -314,7 +314,7 @@ export default function BlogMain({ blogs, topics }) {
               )}
             </AnimatePresence>
 
-            {/* Load More Button */}
+            {/* Discover More Button */}
             {hasMoreBlogs && (
               <div className="text-center mt-12 animate-fadeIn">
                 <Button
@@ -323,7 +323,7 @@ export default function BlogMain({ blogs, topics }) {
                   onClick={loadMoreBlogs}
                   className="px-8 py-4  rounded-full border-primary/30 bg-gradient-theme text-white transition-all duration-300 shadow-lg hover:shadow-xl  scale-95 hover:scale-105"
                 >
-                  Load More (
+                  Disover More (
                   <span className="font-semibold">
                     {filteredAndSortedBlogs.length - visibleCount}
                   </span>

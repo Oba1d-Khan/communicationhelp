@@ -34,7 +34,13 @@ const Footer = () => {
           ))}
         </div>
         <p className="mt-6 text-center text-sm text-primary-darker ">
-          &copy; {new Date().getFullYear()} ObaidDev. All rights reserved.
+          {new Date().getFullYear()} - Built by
+          <Link
+            href={"https://obaid-khan.vercel.app/"}
+            className="font-semibold ms-1"
+          >
+            ObaidDev
+          </Link>
         </p>
       </div>
     </footer>

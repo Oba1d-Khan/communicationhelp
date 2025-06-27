@@ -313,7 +313,7 @@ const AboutMentor = () => {
               {/* Refined CTA Button */}
               <motion.div
                 variants={itemVariants}
-                className="flex justify-center lg:justify-start pt-2"
+                className="flex justify-center lg:justify-start pt-2 "
               >
                 <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
@@ -322,7 +322,7 @@ const AboutMentor = () => {
                 >
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-primary via-secondary to-primary hover:from-primary/90 hover:via-secondary/90 hover:to-primary/90 text-white px-8 py-4 text-base font-bold shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden rounded-xl"
+                    className="bg-gradient-to-r from-primary via-secondary to-primary hover:from-primary/90 hover:via-secondary/90 hover:to-primary/90 text-white px-8 py-4 text-base font-bold shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden rounded-xl "
                   >
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/10 to-transparent"
@@ -330,7 +330,7 @@ const AboutMentor = () => {
                       whileHover={{ x: "100%" }}
                       transition={{ duration: 0.8 }}
                     />
-                    <span className="relative z-10 flex items-center">
+                    <span className="relative z-10 flex items-center ">
                       Get Free Guide + Join Waitlist
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                     </span>
@@ -350,9 +350,11 @@ const AboutMentor = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {/* Professional Card Design */}
+
                 <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden">
                   {/* Header Section */}
                   <div className="relative bg-gradient-to-br from-primary/5 via-white to-secondary/5 p-8 text-center border-b border-gray-100">
+                    <motion.div className="absolute inset-0 rounded-3xl bg-[radial-gradient(#d4d4d4_1px,transparent_1.2px)] [background-size:16px_16px] opacity-70 pointer-events-none z-20" />
                     {/* Professional Avatar */}
                     <motion.div
                       className="relative w-24 h-24 mx-auto mb-4"
@@ -384,7 +386,7 @@ const AboutMentor = () => {
                   </div>
 
                   {/* Professional Stats Grid */}
-                  <div className="p-6">
+                  <div className="p-6 z-50">
                     <motion.div
                       className="grid grid-cols-2 gap-3 mb-6"
                       initial={{ opacity: 0, y: 20 }}

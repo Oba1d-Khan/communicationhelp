@@ -445,7 +445,7 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
                   className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/80 text-foreground hover:bg-primary/10 border border-primary/20 transition-all duration-150 text-sm font-medium shadow-sm group"
                 >
                   <Share2 className="w-4 h-4 group-hover:scale-110 transition-transform duration-150" />
-                  <span>Share this article</span>
+                  <span>Share this blog</span>
                 </motion.button>
               </div>
 
@@ -515,10 +515,10 @@ export default function BlogSingle({ blog, relatedBlogs, blogsMeta }) {
                 </span>
               </motion.div>
 
-              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-heading text-foreground mb-4 leading-tight">
-                Continue Your Journey
+              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-heading  mb-2 leading-tight gradient-heading ">
+                Expand Your Horizons
               </h2>
-              <p className="text-text-light text-base md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed">
+              <p className="text-text-light text-base md:text-lg lg:text-xl max-w-2xl mx-auto ">
                 Explore more insights on communication, empathy, and human
                 connection
               </p>

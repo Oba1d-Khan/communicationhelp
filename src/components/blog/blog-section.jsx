@@ -19,7 +19,7 @@ const BlogSection = async () => {
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-8 gap-6 animate-fadeIn">
             <div className="text-center lg:text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-foreground mb-4 leading-tight">
-                Latest Articles
+                New & Noteworthy!
               </h2>
               <p className="text-text-light text-lg md:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 Dive deeper into the art and science of human connection

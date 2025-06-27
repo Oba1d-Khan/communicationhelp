@@ -1,5 +1,5 @@
 import { Heart, Ear, MessageCircle } from "lucide-react";
-import { FaTiktok, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { FaLinkedin, FaTiktok, FaXTwitter, FaYoutube } from "react-icons/fa6";
 
 export const navLinks = {
   left: [
@@ -38,17 +38,22 @@ export const footerLinks = [
 export const socials = [
   {
     name: "Twitter",
-    href: "http://x.com/",
+    href: "https://x.com/bruce_lambert",
     icon: FaXTwitter,
   },
   {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/bruce-lambert-3b20679/",
+    icon: FaLinkedin,
+  },
+  {
     name: "Youtube",
-    href: "https://youtube.com",
+    href: "https://www.youtube.com/@HowCommunicationWorks",
     icon: FaYoutube,
   },
   {
     name: "TikTok",
-    href: "https://tiktok.com",
+    href: "https://www.tiktok.com/@howcommunicationworks?lang=en",
     icon: FaTiktok,
   },
 ];
