@@ -474,7 +474,7 @@ const Intro = () => {
                   </motion.div>
 
                   <motion.div
-                    className="bg-gradient-to-r from-accent/10 to-primary/10 backdrop-blur-sm p-3 rounded-xl border border-accent/20 shadow-md hover:shadow-lg transition-all duration-300 group"
+                    className="bg-gradient-to-r from-accent/10 to-primary/10 backdrop-blur-sm p-3 rounded-xl border border-success/20   shadow-md hover:shadow-lg transition-all duration-300 group"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 1.5 }}
